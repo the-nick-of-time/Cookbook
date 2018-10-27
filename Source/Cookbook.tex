@@ -1,0 +1,430 @@
+% !TeX document-id = {deced5b7-7a7a-4a2b-a7d0-36bb90ea8bbd}
+% !TeX program = pdflatex -synctex=1 -interaction=nonstopmode -output-directory ../ -aux-directory ./ %.tex | txs:///view-pdf
+
+\documentclass[twoside, openany]{book}
+
+
+\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
+
+\usepackage[contents, nonumber]{cuisine}
+\renewcommand{\recipefont}{\large}
+\renewcommand*{\recipestepnumberfont}{\large\itshape\bfseries}
+\renewcommand{\recipetimefont}{\itshape}
+\renewcommand{\recipeservingsfont}{\bfseries}
+\renewcommand{\recipetitlefont}{\Large\bfseries}
+\RecipeWidths{\textwidth}{.2\textwidth}{.05\textwidth}{.2\textwidth}{.075\textwidth}{.075\textwidth}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks, citecolor=blue, filecolor=black, linkcolor=black, urlcolor=black}
+
+\usepackage{subfiles}
+\usepackage{graphicx}
+\usepackage[quenya]{tengwarscript}
+\tengmag{1.2}
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+\usepackage{xspace}
+\usepackage{thumbs}
+
+\graphicspath{{./images/}{../images/}}
+
+\newcommand{\dish}[1]{\subfile{entries/#1}}
+\newcommand{\ap}{all-purpose flour}
+\newcommand{\ww}{whole wheat flour\xspace}
+\newcommand{\wwp}{whole wheat pastry flour\xspace}
+\newcommand{\wwb}{whole wheat bread flour\xspace}
+\newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
+
+% Define a macro for the current chapter name
+%https://tex.stackexchange.com/questions/310046/fancyhdr-and-redefinition-of-leftmark-rightmark
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% enddef
+
+\fancypagestyle{frontmaterial}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\footskip}{.6in}
+	\pagenumbering{roman}
+	\fancyfoot[C]{\thepage}
+	\fancyhead[RE,LO]{\thepage}
+}
+
+\fancypagestyle{main}{
+	\fancyhf{}
+%	\fancyfoot{}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\footskip}{.6in}
+	\pagenumbering{arabic}
+	\fancyhead[RE,LO]{\thepage}
+	\fancyhead[RO,LE]{\MakeUppercase{\large\textbf{\leftmark}}}
+	\fancyfoot[C]{\normalsize \thepage\ of\ \pageref{LastPage}}
+}
+
+\newcommand{\frontsetup}{
+	\pagestyle{frontmaterial}
+	\fancypagestyle{plain}{
+		\pagestyle{frontmaterial}
+		% But with no header because that would be ugly on the already mostly empty top quarter of the page
+		\fancyhead{}
+	}
+}
+
+\newcommand{\mainsetup}{
+	% If the newpage isn't here, the last page of the table of contents will be affected by this setup
+	\newpage
+	% Conditionally add a clear page to make the main stuff with the new page numbering start on an odd page otherwise page margins and thumb mark side will be wrong as long as the TOC spans an odd number of pages
+	% I would prefer to avoid a blank page because this isn't a formal thing and is mostly intended as a digital document anyway but latex doesn't like violating ~common typesetting conventions~ like right side == odd page
+	{\thispagestyle{empty} \cleardoublepage}
+	\pagestyle{main}
+	\fancypagestyle{plain}{
+		\pagestyle{main}
+		% But with no header because that would be ugly on the already mostly empty top quarter of the page
+		\fancyhead{}
+	}
+}
+
+
+% TODO: Correct times. At best the current times are approximate.
+
+\begin{document}
+
+\frontsetup
+
+{
+	\bfseries \tableofcontents
+}
+
+\mainsetup
+
+\chapter{Breakfast}
+\addthumb{Breakfast}{\Roman{chapter}}{black}{gray}
+
+%\mainsetup
+
+
+\section{Egg}
+
+\dish{Farmers_eggs}
+
+
+\section{Not Egg}
+
+\dish{Pancakes}
+
+% Untested
+\dish{Savory_oatmeal}
+
+
+
+
+
+
+\chapter{Dinner}
+\addthumb{Dinner}{\Roman{chapter}}{black}{gray}
+
+
+\section{Full Meals}
+
+\dish{Almond_chicken_and_rice}
+
+\dish{Beef_pasties}
+
+\dish{Beef_roast}
+
+\dish{Beef_stew}
+
+\dish{Broccoli_cheese_soup}
+
+\dish{Chuckwagon_casserole}
+
+\dish{Fried_rice}
+
+\dish{Goulash}
+
+\dish{Green_tortellini}
+
+\dish{Mongolian_beef}
+
+\dish{Parmesan_chicken}
+
+\dish{Ribs}
+
+\dish{Rosemary_chicken}
+
+\dish{Spaghetti}
+
+\dish{Squash_soup}
+
+\dish{Stir_fry}
+
+\dish{Thanksgiving_dinner}
+
+\dish{Wax_bean_soup}
+
+% Untested
+\dish{Washtunkala_stew}
+
+% Untested
+\dish{Pad_thai}
+
+% Untested
+\dish{Parsnips_and_chicken}
+
+% Untested
+\dish{Jambalaya}
+
+% Untested
+\dish{Portobello_chili}
+
+% Untested
+\dish{Oregano_mushroom_chicken}
+
+% Untested
+\dish{Turkey_sage_meatballs}
+
+% Untested
+\dish{Sesame_ginger_pork_and_quinoa}
+
+% Untested
+\dish{Rice_edamame_apple_bowls}
+
+% Untested
+\dish{Sage_breaded_chicken}
+
+% Untested
+\dish{Sriracha_chicken}
+
+% Untested
+\dish{Salami_cheese_stromboli}
+
+% Untested
+\dish{One_pan_chicken}
+
+% Untested
+\dish{Onion_beef_calzone}
+
+% Untested
+\dish{Oven_fried_chicken}
+
+% Tested, given like 3/5
+% \dish{Rigatoni_genovese}
+
+% Untested
+\dish{Lentil_bolognese}
+
+% Untested
+\dish{Chana_masala}
+
+
+\section{Components}
+
+\dish{Pasta}
+
+\dish{Pesto}
+
+\dish{Quinoa}
+
+\dish{Rice}
+
+\dish{Spaghetti_sauce}
+
+\dish{Stuffing}
+
+% Untested
+\dish{Lime_ginger_vinaigrette}
+
+% Untested
+\dish{Peanut_sauce}
+
+% Untested
+\dish{Pizza_dough}
+
+% Untested
+\dish{Whole_wheat_pizza_dough}
+
+% REQUEST: Macaroni and cheese
+
+
+
+
+
+
+\chapter{Sides}
+\addthumb{Sides}{\Roman{chapter}}{black}{gray}
+
+
+\section{Breads}
+
+\dish{Biscuits}
+
+\dish{Dinner_rolls}
+
+% Untested
+\dish{Squash_corn_muffins}
+
+% Untested
+\dish{Cheddar_chive_cornbread}
+
+
+\section{Vegetables}
+
+\dish{Brussels_sprouts}
+
+\dish{Corn_and_bean_salad}
+
+\dish{Mashed_potatoes}
+
+\dish{Roast_vegetables}
+
+% Untested
+\dish{Roast_potatoes_metric}
+% \dish{Roast_potatoes}
+
+
+
+
+
+
+\chapter{Snacks}
+\addthumb{Snacks}{\Roman{chapter}}{black}{gray}
+
+\section{Smoothies}
+
+\dish{Berry_smoothie}
+
+% Untested
+\dish{Green_tea_smoothie}
+
+\section{Dips}
+
+\dish{Black_bean_dip}
+
+\dish{Salsa}
+
+% Untested
+\dish{Nut_dip}
+
+% Untested
+\dish{Pumpkin_butter}
+
+
+
+
+
+
+
+\chapter{Desserts}
+\addthumb{Desserts}{\Roman{chapter}}{black}{gray}
+
+
+\section{Cookies}
+
+\dish{Brown_butter_chocolate_chip_cookies}
+
+\dish{C4_cookies}
+
+\dish{Gingerbread}
+
+\dish{Lebkuchen}
+
+\dish{Pride_of_iowa}
+
+\dish{Pride_of_iowa_refrigerator}
+
+\dish{Pumpkin_cookies}
+
+\dish{Snickerdoodles}
+
+\dish{Sugar_cookies}
+
+% Untested
+\dish{Chocolate_peanut_tartlets}
+
+
+\section{Quick Breads}
+
+\dish{Banana_bread}
+
+\dish{Orange_bread}
+
+\dish{Pumpkin_bread}
+
+\dish{Rhubarb_coffee_cake}
+
+\dish{Scones}
+
+% Untested
+\dish{Ginger_biscuits}
+
+% Untested
+\dish{Pumpkin_walnut_muffins}
+
+% Untested
+\dish{Blueberry_walnut_muffins}
+
+% Untested
+\dish{Red_velvet_brownies}
+
+% Untested
+\dish{Fudgy_brownies}
+
+% Untested
+\dish{Lembas}
+
+% Untested
+\dish{Nutella_brownies}
+
+% Untested
+\dish{Raspberry_scones}
+
+
+\section{Pies}
+
+\dish{Pie_dough}
+
+\dish{Apple_pie}
+
+\dish{Cherry_pie}
+
+\dish{Rhubarb_pie}
+
+% Untested
+\dish{Blueberry_tart}
+
+% REQUEST: Mallory's apple pie, as Madison says it's really good
+
+
+\section{Fruit Desserts}
+
+\dish{Baked_apples}
+
+\dish{Berry_crumble}
+
+\dish{Rhubarb_sauce}
+
+% Untested
+\dish{Lemon_bars}
+
+% Untested
+\dish{Cherry_raspberry_sorbet}
+
+% Untested
+\dish{Berry_jam}
+
+
+\section{Cake}
+
+\dish{Chocolate_cake}
+
+\dish{Buttercream_frosting}
+
+% Untested
+\dish{Cranberry_cake}
+
+% Untested
+\dish{Raspberry_cheesecake}
+
+
+
+\end{document}
