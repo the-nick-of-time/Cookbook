@@ -1,4 +1,7 @@
-OPTIONS=-synctex=1 -interaction=nonstopmode -output-directory ../ -aux-directory ./
+sync=1
+outdir=../
+auxdir=./
+OPTIONS=-synctex=$(sync) -interaction=nonstopmode -output-directory=$(outdir) -aux-directory=$(auxdir)
 
 
 all: cookbook tested
