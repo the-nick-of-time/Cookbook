@@ -10,18 +10,18 @@ all: cookbook tested
 cookbook: cookbook_setup cookbook_compile cookbook_cleanup
 
 cookbook_setup:
-cookbook_compile:
+cookbook_compile: cookbook_setup
 	pdflatex $(OPTIONS) -job-name=Cookbook Cookbook.tex > /dev/null
 	pdflatex $(OPTIONS) -job-name=Cookbook Cookbook.tex > /dev/null
-cookbook_cleanup:
+cookbook_cleanup: cookbook_compile
 
 
 tested: tested_setup tested_compile tested_cleanup
 
 tested_setup:
 	cat Cookbook.tex | python3 remove_untested.py > filtered.tex
-tested_compile:
+tested_compile: tested_setup
 	pdflatex $(OPTIONS) -job-name=Cookbook-Tested_only filtered.tex > /dev/null
 	pdflatex $(OPTIONS) -job-name=Cookbook-Tested_only filtered.tex > /dev/null
-tested_cleanup:
+tested_cleanup: tested_compile
 	rm filtered.tex
