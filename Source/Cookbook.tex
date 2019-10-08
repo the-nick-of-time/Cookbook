@@ -20,15 +20,19 @@
 \hypersetup{colorlinks, citecolor=blue, filecolor=black, linkcolor=black, urlcolor=black}
 
 \usepackage{subfiles}
-\usepackage{graphicx}
 \usepackage[quenya]{tengwarscript}
 \tengmag{1.2}
 \usepackage{fancyhdr}
 \usepackage{etoolbox}
 \usepackage{xspace}
 \usepackage{thumbs}
-
-\graphicspath{{./images/}{../images/}}
+\usepackage{tabularx}
+\def\arraystretch{1.25}
+\usepackage{hhline}
+\usepackage{slashbox}
+\usepackage{nicefrac}
+\let\fr\nicefrac
+\usepackage{siunitx}
 
 \newcommand{\dish}[1]{\subfile{entries/#1}}
 \newcommand{\ap}{all-purpose flour}
@@ -442,6 +446,79 @@
 
 % Untested
 \dish{Raspberry_cheesecake}
+
+
+\chapter{Appendix}
+\addthumb{Appendix}{\Roman{chapter}}{black}{gray}
+
+
+\section{Measurement Conversions}
+
+\begin{table}[h]
+	\centering
+	\label{tab:volume}
+	\caption{Volume}
+	\begin{tabular}{c||c|c|c|c|c}
+		\backslashbox{One}{Is this many}& \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} & \textbf{mL} \\ \hhline{=#=|=|=|=|=}
+		\textbf{Teaspoon}               &         1         &        \fr13        &      \fr{1}{12}      &  \fr{1}{48}  &     5       \\ \hline
+		\textbf{Tablespoon}             &         3         &          1          &        \fr12         &  \fr{1}{16}  &    15       \\ \hline
+		\textbf{Fluid Ounce}            &        12         &          2          &          1           &    \fr18     &    30       \\ \hline
+		\textbf{Cup}                    &        48         &         16          &          8           &      1       &    240      \\ \hline
+		\textbf{mL}                     &       \fr15       &     \fr{1}{15}      &      \fr{1}{30}      & \fr{1}{240}  &     1
+	\end{tabular}
+\end{table}
+
+
+1 pint = 2 cups
+
+1 quart = 2 pints = 4 cups
+
+1 gallon = 4 quarts = 8 pints = 16 cups = 128 fluid ounces
+
+1 liter = 34 fluid ounces $\approx$ 1 quart
+
+
+\begin{table}[h]
+	\centering
+	\label{tab:temp}
+	\caption{Temperature}
+	\begin{tabular}{c|c}
+		\si{\degree}F & \si{\degree}C \\ \hline
+		     250      &      130      \\ \hline
+		     300      &      150      \\ \hline
+		     325      &      170      \\ \hline
+		     350      &      180      \\ \hline
+		     375      &      190      \\ \hline
+		     400      &      200      \\ \hline
+		     425      &      220
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+	\centering
+	\label{tab:mass}
+	\caption{Mass and Weight}
+	\begin{tabular}{c|c}
+		 g   &       oz       \\ \hline
+		 10  &     \fr14      \\ \hline
+		 15  &     \fr12      \\ \hline
+		 25  &       1        \\ \hline
+		 50  &     \fr74      \\ \hline
+		 75  &   \fr{11}{4}   \\ \hline
+		100  &     \fr72      \\ \hline
+		150  &   \fr{11}{2}   \\ \hline
+		200  &       7        \\ \hline
+		250  &       9        \\ \hline
+		300  &   \fr{21}{2}   \\ \hline
+		350  &       12       \\ \hline
+		400  &       14       \\ \hline
+		450  &   16 (1 lb)    \\ \hline
+		500  &       18       \\ \hline
+		700  &       24       \\ \hline
+		1000 & 36 (2 lb 4 oz)
+	\end{tabular}
+\end{table}
 
 
 
