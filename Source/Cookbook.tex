@@ -28,6 +28,7 @@
 \usepackage{thumbs}
 \usepackage{tabularx}
 \def\arraystretch{1.25}
+\def\belowcaptionskip{0.2em}
 \usepackage{hhline}
 \usepackage{slashbox}
 \usepackage{nicefrac}
@@ -40,6 +41,8 @@
 \newcommand{\wwp}{whole wheat pastry flour\xspace}
 \newcommand{\wwb}{whole wheat bread flour\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
+
+\newcommand{\thumbmark}[1]{\addthumb{#1}{\Roman{chapter}}{black}{gray}}
 
 % Define a macro for the current chapter name
 %https://tex.stackexchange.com/questions/310046/fancyhdr-and-redefinition-of-leftmark-rightmark
@@ -105,7 +108,7 @@
 \mainsetup
 
 \chapter{Breakfast}
-\addthumb{Breakfast}{\Roman{chapter}}{black}{gray}
+\thumbmark{Breakfast}
 
 %\mainsetup
 
@@ -128,7 +131,7 @@
 
 
 \chapter{Dinner}
-\addthumb{Dinner}{\Roman{chapter}}{black}{gray}
+\thumbmark{Dinner}
 
 
 \section{Full Meals}
@@ -262,7 +265,7 @@
 
 
 \chapter{Sides}
-\addthumb{Sides}{\Roman{chapter}}{black}{gray}
+\thumbmark{Sides}
 
 
 \section{Breads}
@@ -306,7 +309,7 @@
 
 
 \chapter{Snacks}
-\addthumb{Snacks}{\Roman{chapter}}{black}{gray}
+\thumbmark{Snacks}
 
 \section{Smoothies}
 
@@ -349,7 +352,7 @@
 
 \dish{Pride_of_iowa}
 
-\dish{Pride_of_iowa_refrigerator}
+%\dish{Pride_of_iowa_refrigerator}
 
 \dish{Pumpkin_cookies}
 
@@ -449,7 +452,7 @@
 
 
 \chapter{Appendix}
-\addthumb{Appendix}{\Roman{chapter}}{black}{gray}
+\thumbmark{Appendix}
 
 
 \section{Measurement Conversions}
