@@ -1,45 +1,45 @@
 sync=1
-outdir=../
-auxdir=./
-OPTIONS=-synctex=$(sync) -interaction=nonstopmode -output-directory=$(outdir) -aux-directory=$(auxdir)
+OPTIONS=-synctex=$(sync) -interaction=nonstopmode
 
 
 all: cookbook tested
 
 
-cookbook: cookbook_setup cookbook_compile cookbook_cleanup
+cookbook: ../Cookbook.pdf
 
-cookbook_setup:
-cookbook_compile: cookbook_setup
-	pdflatex $(OPTIONS) -job-name=Cookbook Cookbook.tex > /dev/null
+../Cookbook.pdf: Cookbook.tex ./entries/*.tex
+	pdflatex $(OPTIONS) -jobname=Cookbook Cookbook.tex > /dev/null
 	# Compile again for table of contents
-	pdflatex $(OPTIONS) -job-name=Cookbook Cookbook.tex > /dev/null
-cookbook_cleanup: cookbook_compile
+	pdflatex $(OPTIONS) -jobname=Cookbook Cookbook.tex > /dev/null
+	mv Cookbook.pdf ../
+	mv Cookbook.synctex.gz ../
 
 
-tested: tested_setup tested_compile tested_cleanup
+tested: ../Cookbook-Tested_only.pdf
 
-tested_setup:
-	cat Cookbook.tex | python3 remove_untested.py > filtered.tex
-tested_compile: tested_setup
-	pdflatex $(OPTIONS) -job-name=Cookbook-Tested_only filtered.tex > /dev/null
+../Cookbook-Tested_only.pdf: filtered.tex ./entries/*.tex
+	pdflatex $(OPTIONS) -jobname=Cookbook-Tested_only $< > /dev/null
 	# Compile again for table of contents
-	pdflatex $(OPTIONS) -job-name=Cookbook-Tested_only filtered.tex > /dev/null
-tested_cleanup: tested_compile
-	rm filtered.tex
+	pdflatex $(OPTIONS) -jobname=Cookbook-Tested_only $< > /dev/null
+	mv Cookbook-Tested_only.pdf ../
+	mv Cookbook-Tested_only.synctex.gz ../
+
+filtered.tex: remove_untested.py Cookbook.tex
+	cat Cookbook.tex | python3 remove_untested.py > $@
 
 
-record:
-	pdflatex $(OPTIONS) -record-package-usages=./packages.used -job-name=Cookbook Cookbook.tex > /dev/null
+
+packages.used: Cookbook.tex
+	pdflatex $(OPTIONS) -record-package-usages=./$@ -job-name=Cookbook $< > /dev/null
 
 
-.PHONY: view clean
+.PHONY: view clean all cookbook tested view-main view-tested
 
 clean:
-	rm *.aux *.log *.out *.tmb *.toc ../*.pdf ../*.synctex.gz
+	git clean -Xf ..
 
 view: view-main view-tested
-view-main:
+view-main: ../Cookbook.pdf
 	xdg-open ../Cookbook.pdf
-view-tested:
+view-tested: ../Cookbook-Tested_only.pdf
 	xdg-open ../Cookbook-Tested_only.pdf
