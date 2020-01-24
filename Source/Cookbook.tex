@@ -30,6 +30,13 @@
 \usepackage{nicefrac}
 \let\fr\nicefrac
 \usepackage{siunitx}
+\usepackage{ifthen}
+\usepackage{substr}
+
+\newboolean{showuntested}
+\IfSubStringInString{\detokenize{Tested}}{\jobname}{}{\setboolean{showuntested}{true}}
+
+\newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
 
 \newcommand{\dish}[1]{\subfile{entries/#1}}
 \newcommand{\ap}{all-purpose flour}
@@ -119,7 +126,7 @@
 \dish{Pancakes}
 
 % Untested
-\dish{Savory_oatmeal}
+\untested{\dish{Savory_oatmeal}}
 
 
 
@@ -173,46 +180,46 @@
 \dish{Wax_bean_soup}
 
 % Untested
-\dish{Washtunkala_stew}
+\untested{\dish{Washtunkala_stew}}
 
 % Untested
-\dish{Pad_thai}
+\untested{\dish{Pad_thai}}
 
 % Untested
-\dish{Parsnips_and_chicken}
+\untested{\dish{Parsnips_and_chicken}}
 
 % Untested
-\dish{Jambalaya}
+\untested{\dish{Jambalaya}}
 
 % Untested
-\dish{Portobello_chili}
+\untested{\dish{Portobello_chili}}
 
 % Untested
-\dish{Oregano_mushroom_chicken}
+\untested{\dish{Oregano_mushroom_chicken}}
 
 % Untested
-\dish{Turkey_sage_meatballs}
+\untested{\dish{Turkey_sage_meatballs}}
 
 % Untested
-\dish{Sesame_ginger_pork_and_quinoa}
+\untested{\dish{Sesame_ginger_pork_and_quinoa}}
 
 % Untested
-\dish{Rice_edamame_apple_bowls}
+\untested{\dish{Rice_edamame_apple_bowls}}
 
 % Untested
-\dish{Sage_breaded_chicken}
+\untested{\dish{Sage_breaded_chicken}}
 
 % Untested
-\dish{Sriracha_chicken}
+\untested{\dish{Sriracha_chicken}}
 
 % Untested
-\dish{Salami_cheese_stromboli}
+\untested{\dish{Salami_cheese_stromboli}}
 
 % Untested
-\dish{One_pan_chicken}
+\untested{\dish{One_pan_chicken}}
 
 % Untested
-\dish{Onion_beef_calzone}
+\untested{\dish{Onion_beef_calzone}}
 
 % Untested
 \dish{Oven_fried_chicken}
@@ -221,10 +228,10 @@
 % \dish{Rigatoni_genovese}
 
 % Untested
-\dish{Lentil_bolognese}
+\untested{\dish{Lentil_bolognese}}
 
 % Untested
-\dish{Chana_masala}
+\untested{\dish{Chana_masala}}
 
 
 \section{Components}
@@ -242,16 +249,16 @@
 \dish{Stuffing}
 
 % Untested
-\dish{Lime_ginger_vinaigrette}
+\untested{\dish{Lime_ginger_vinaigrette}}
 
 % Untested
-\dish{Peanut_sauce}
+\untested{\dish{Peanut_sauce}}
 
 % Untested
-\dish{Pizza_dough}
+\untested{\dish{Pizza_dough}}
 
 % Untested
-\dish{Whole_wheat_pizza_dough}
+\untested{\dish{Whole_wheat_pizza_dough}}
 
 % REQUEST: Macaroni and cheese
 
@@ -273,10 +280,10 @@
 \dish{Dinner_rolls}
 
 % Untested
-\dish{Cheddar_chive_cornbread}
+\untested{\dish{Cheddar_chive_cornbread}}
 
 % Untested
-\dish{Squash_corn_muffins}
+\untested{\dish{Squash_corn_muffins}}
 
 
 \section{Fruits and Vegetables}
@@ -304,7 +311,7 @@
 \dish{Roast_vegetables}
 
 % Untested
-\dish{Roast_potatoes_metric}
+\untested{\dish{Roast_potatoes_metric}}
 % \dish{Roast_potatoes}
 
 
@@ -329,10 +336,10 @@
 \dish{Salsa}
 
 % Untested
-\dish{Nut_dip}
+\untested{\dish{Nut_dip}}
 
 % Untested
-\dish{Pumpkin_butter}
+\untested{\dish{Pumpkin_butter}}
 
 
 
@@ -365,7 +372,7 @@
 \dish{Sugar_cookies}
 
 % Untested
-\dish{Chocolate_peanut_tartlets}
+\untested{\dish{Chocolate_peanut_tartlets}}
 
 
 \section{Quick Breads}
@@ -381,28 +388,28 @@
 \dish{Scones}
 
 % Untested
-\dish{Ginger_biscuits}
+\untested{\dish{Ginger_biscuits}}
 
 % Untested
-\dish{Pumpkin_walnut_muffins}
+\untested{\dish{Pumpkin_walnut_muffins}}
 
 % Untested
-\dish{Blueberry_walnut_muffins}
+\untested{\dish{Blueberry_walnut_muffins}}
 
 % Untested
-\dish{Red_velvet_brownies}
+\untested{\dish{Red_velvet_brownies}}
 
 % Untested
-\dish{Fudgy_brownies}
+\untested{\dish{Fudgy_brownies}}
 
 % Untested
-\dish{Lembas}
+\untested{\dish{Lembas}}
 
 % Untested
-\dish{Nutella_brownies}
+\untested{\dish{Nutella_brownies}}
 
 % Untested
-\dish{Raspberry_scones}
+\untested{\dish{Raspberry_scones}}
 
 
 \section{Pies}
@@ -416,7 +423,7 @@
 \dish{Rhubarb_pie}
 
 % Untested
-\dish{Blueberry_tart}
+\untested{\dish{Blueberry_tart}}
 
 % REQUEST: Mallory's apple pie, as Madison says it's really good
 
@@ -430,19 +437,19 @@
 \dish{Rhubarb_sauce}
 
 % Untested
-\dish{Boiled_apples}
+\untested{\dish{Boiled_apples}}
 
 % Untested
-\dish{Coconut_rice_pudding}
+\untested{\dish{Coconut_rice_pudding}}
 
 % Untested
-\dish{Lemon_bars}
+\untested{\dish{Lemon_bars}}
 
 % Untested
-\dish{Cherry_raspberry_sorbet}
+\untested{\dish{Cherry_raspberry_sorbet}}
 
 % Untested
-\dish{Berry_jam}
+\untested{\dish{Berry_jam}}
 
 
 \section{Cake}
@@ -452,10 +459,10 @@
 \dish{Buttercream_frosting}
 
 % Untested
-\dish{Cranberry_cake}
+\untested{\dish{Cranberry_cake}}
 
 % Untested
-\dish{Raspberry_cheesecake}
+\untested{\dish{Raspberry_cheesecake}}
 
 
 \chapter{Appendix}

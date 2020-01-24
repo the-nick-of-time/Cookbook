@@ -17,15 +17,12 @@ cookbook: ../Cookbook.pdf
 
 tested: ../Cookbook-Tested_only.pdf
 
-../Cookbook-Tested_only.pdf: filtered.tex ./entries/*.tex
+../Cookbook-Tested_only.pdf: Cookbook.tex ./entries/*.tex
 	pdflatex $(OPTIONS) -jobname=Cookbook-Tested_only $< > /dev/null
 	# Compile again for table of contents
 	pdflatex $(OPTIONS) -jobname=Cookbook-Tested_only $< > /dev/null
 	mv Cookbook-Tested_only.pdf ../
 	mv Cookbook-Tested_only.synctex.gz ../
-
-filtered.tex: remove_untested.py Cookbook.tex
-	cat Cookbook.tex | python3 remove_untested.py > $@
 
 
 
