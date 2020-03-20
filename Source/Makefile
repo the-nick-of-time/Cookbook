@@ -25,7 +25,7 @@ tested: ../Cookbook-Tested_only.pdf
 	mv Cookbook-Tested_only.synctex.gz ../
 
 new:
-	./interactive.sh
+	"$(PWD)/interactive.sh"
 
 
 
