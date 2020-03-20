@@ -24,13 +24,16 @@ tested: ../Cookbook-Tested_only.pdf
 	mv Cookbook-Tested_only.pdf ../
 	mv Cookbook-Tested_only.synctex.gz ../
 
+new:
+	./interactive.sh
+
 
 
 packages.used: Cookbook.tex
 	pdflatex $(OPTIONS) -record-package-usages=./$@ -job-name=Cookbook $< > /dev/null
 
 
-.PHONY: view clean all cookbook tested view-main view-tested
+.PHONY: view clean all cookbook tested view-main view-tested new
 
 clean:
 	git clean -Xf ..

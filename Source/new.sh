@@ -12,12 +12,12 @@ usage() {
 
 filename() {
 	# python -c 'import sys;title=sys.argv[1];print("./entries/" + title.lower().translate(str.maketrans(" ", "_")) + ".tex")' "$1"
-	basename=$(sed 's/[^[:alpha:]]/_/g' <<< "$1")
+	basename=$(sed 's/[^[:alpha:]]/_/g' <<< "$title")
 	echo "$here/entries/$basename.tex"
 }
 
 label() {
-	sed 's/[^[:alpha:]]//g' <<< "$1"
+	sed 's/[^[:alpha:]]//g' <<< "$title"
 }
 
 
@@ -26,7 +26,7 @@ cat <<< "\\documentclass[../Cookbook.tex]{subfiles}
 
 \\begin{document}
 
-\\begin{recipe}[$(label "$title")]{\\textbf{$title}}{$yield}{$time}
+\\begin{recipe}[$(label)]{\\textbf{$title}}{$yield}{$time}
 	
 \\end{recipe}
 
@@ -40,4 +40,5 @@ if [ "$#" -ne 3 ] ; then
 	exit 1
 fi
 
-file > "$(filename "$title")"
+file > "$(filename)"
+echo "Created entries/$(basename "$(filename)")" >&2
