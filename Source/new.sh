@@ -11,13 +11,11 @@ usage() {
 }
 
 filename() {
-	# python -c 'import sys;title=sys.argv[1];print("./entries/" + title.lower().translate(str.maketrans(" ", "_")) + ".tex")' "$1"
-	basename=$(sed 's/[^[:alpha:]]/_/g' <<< "$title")
-	echo "$here/entries/$basename.tex"
+	echo "$here/entries/$(label).tex"
 }
 
 label() {
-	sed 's/[^[:alpha:]]//g' <<< "$title"
+	python -c 'from sys import argv;from re import sub;print(sub(r"[^\w]", "", argv[1].title()),end="")' "$title"
 }
 
 

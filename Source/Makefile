@@ -30,7 +30,7 @@ new:
 
 
 packages.used: Cookbook.tex
-	pdflatex $(OPTIONS) -record-package-usages=./$@ -job-name=Cookbook $< > /dev/null
+	pdflatex $(OPTIONS) -recorder -jobname=Cookbook $< > /dev/null
 
 
 .PHONY: view clean all cookbook tested view-main view-tested new
