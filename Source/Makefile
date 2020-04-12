@@ -43,3 +43,9 @@ view-main: ../Cookbook.pdf
 	xdg-open ../Cookbook.pdf
 view-tested: ../Cookbook-Tested_only.pdf
 	xdg-open ../Cookbook-Tested_only.pdf
+
+upload: upload-main upload-tested
+upload-main: ../Cookbook.pdf
+	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook.pdf
+upload-tested: ../Cookbook-Tested_only.pdf
+	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook-Tested_only.pdf
