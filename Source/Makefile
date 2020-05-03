@@ -49,3 +49,6 @@ upload-main: ../Cookbook.pdf
 	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook.pdf
 upload-tested: ../Cookbook-Tested_only.pdf
 	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook-Tested_only.pdf
+
+release:
+	./release.sh
