@@ -8,3 +8,4 @@
 *.toc
 packages.used
 filtered.tex
+bazel-*
