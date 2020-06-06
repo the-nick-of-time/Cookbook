@@ -1,8 +1,24 @@
+load("@bazel_latex//:latex.bzl", "latex_document")
+
 def build_cookbook(name):
-    native.genrule(
+    latex_document(
         name = name,
-        srcs = [":Cookbook.tex"] + native.glob([":entries/*.tex"]),
-        outs = [name + ".pdf"],
-        cmd = "pdflatex -synctex=1 -interaction=nonstopmode -jobname='{}' $(location :Cookbook.tex) > /dev/null".format(name)
+        srcs = native.glob([":entries/*.tex"]) + [
+            "@bazel_latex//packages:hyperref",
+            "@bazel_latex//packages:cuisine",
+            "@bazel_latex//packages:fancyhdr",
+            "@bazel_latex//packages:subfiles",
+            "@bazel_latex//packages:libertine",
+            "@bazel_latex//packages:tabularx",
+            "@bazel_latex//packages:etoolbox",
+            "@bazel_latex//packages:thumbs",
+            "@bazel_latex//packages:tengwarscript",
+            "@bazel_latex//packages:slashbox",
+            "@bazel_latex//packages:hhline",
+            "@bazel_latex//packages:nicefrac",
+            "@bazel_latex//packages:siunitx",
+            "@bazel_latex//packages:substr",
+        ],
+        main = ":Cookbook.tex",
     )
 

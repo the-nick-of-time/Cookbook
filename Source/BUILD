@@ -4,6 +4,6 @@ build_cookbook(
     name = "Cookbook"
 )
 
-build_cookbook(
-    name = "Cookbook - Tested"
-)
+# build_cookbook(
+#     name = "Cookbook - Tested"
+# )
