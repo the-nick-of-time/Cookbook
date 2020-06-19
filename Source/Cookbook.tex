@@ -1,5 +1,5 @@
 \documentclass[twoside, openany]{book}
-\usepackage{libertine}
+% \usepackage{libertine}
 \usepackage[T1]{fontenc}
 
 \usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
@@ -16,8 +16,8 @@
 \hypersetup{colorlinks, citecolor=blue, filecolor=black, linkcolor=black, urlcolor=black}
 
 \usepackage{subfiles}
-\usepackage[quenya]{tengwarscript}
-\tengmag{1.2}
+% \usepackage[quenya]{tengwarscript}
+% \tengmag{1.2}
 \usepackage{fancyhdr}
 \usepackage{etoolbox}
 \usepackage{xspace}
@@ -26,7 +26,7 @@
 \def\arraystretch{1.25}
 \def\belowcaptionskip{0.2em}
 \usepackage{hhline}
-\usepackage{slashbox}
+\usepackage{diagbox}
 \usepackage{nicefrac}
 \let\fr\nicefrac
 \usepackage{siunitx}
@@ -434,7 +434,7 @@
 	\label{tab:volume}
 	\caption{Volume}
 	\begin{tabular}{c||c|c|c|c|c}
-		\backslashbox{One}{Is this many}& \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} & \textbf{mL} \\ \hhline{=#=|=|=|=|=}
+		\diagbox[dir=NW]{One}{Is this many}& \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} & \textbf{mL} \\ \hhline{=#=|=|=|=|=}
 		\textbf{Teaspoon}               &         1         &        \fr13        &      \fr{1}{12}      &  \fr{1}{48}  &     5       \\ \hline
 		\textbf{Tablespoon}             &         3         &          1          &        \fr12         &  \fr{1}{16}  &    15       \\ \hline
 		\textbf{Fluid Ounce}            &        12         &          2          &          1           &    \fr18     &    30       \\ \hline
