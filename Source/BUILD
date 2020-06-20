@@ -1,18 +1,13 @@
-# load(":compile.bzl", "build_cookbook")
 load("@bazel_latex//:latex.bzl", "latex_document")
 
-# build_cookbook(
-#     name = "Cookbook"
-# )
+filegroup(
+    name = "recipes",
+    srcs = glob(["entries/*.tex"]),
+)
 
-# build_cookbook(
-#     name = "Cookbook - Tested"
-# )
-
-latex_document(
-    name = "Cookbook",
-    main = ":Cookbook.tex",
-    srcs = glob([":entries/*.tex"]) + [
+filegroup(
+    name = "packages",
+    srcs = [
         "@bazel_latex//packages:hyperref",
         "@bazel_latex//packages:geometry",
         "@bazel_latex//packages:cuisine",
@@ -28,5 +23,30 @@ latex_document(
         "@bazel_latex//packages:nicefrac",
         "@bazel_latex//packages:siunitx",
         "@bazel_latex//packages:substr",
+    ],
+)
+
+genrule(
+    name = "debug",
+    srcs = [":recipes"],
+    outs = ["out.txt"],
+    cmd = "echo $(locations :recipes) && touch $(location out.txt)"
+)
+
+latex_document(
+    name = "Cookbook",
+    main = "Cookbook.tex",
+    srcs = [
+        ":recipes",
+        ":packages",
+    ]
+)
+
+latex_document(
+    name = "Cookbook_Tested",
+    main = "Cookbook.tex",
+    srcs = [
+        ":recipes",
+        ":packages",
     ]
 )
