@@ -8,16 +8,17 @@ filegroup(
 filegroup(
     name = "packages",
     srcs = [
+        "@bazel_latex//packages:fontspec",
         "@bazel_latex//packages:hyperref",
         "@bazel_latex//packages:geometry",
         "@bazel_latex//packages:cuisine",
         "@bazel_latex//packages:fancyhdr",
         "@bazel_latex//packages:subfiles",
-        # "@bazel_latex//packages:libertine",
         "@bazel_latex//packages:tabularx",
         "@bazel_latex//packages:etoolbox",
         "@bazel_latex//packages:thumbs",
-        "@bazel_latex//packages:tengwarscript",
+        # "@bazel_latex//packages:tengwarscript",
+        # ":unzip_font",
         "@bazel_latex//packages:diagbox",
         "@bazel_latex//packages:hhline",
         "@bazel_latex//packages:nicefrac",
@@ -27,10 +28,10 @@ filegroup(
 )
 
 genrule(
-    name = "debug",
-    srcs = [":recipes"],
-    outs = ["out.txt"],
-    cmd = "echo $(locations :recipes) && touch $(location out.txt)"
+    name = "unzip_font",
+    srcs = ["@tengwar_quenya//file"],
+    outs = ["QUENYA.TTF"],
+    cmd = "unzip $(location @tengwar_quenya//file) -d $$(dirname $(location :QUENYA.TTF))"
 )
 
 latex_document(

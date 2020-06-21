@@ -1,5 +1,4 @@
 \documentclass[twoside, openany]{book}
-% \usepackage{libertine}
 \usepackage[T1]{fontenc}
 
 \usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
@@ -32,6 +31,9 @@
 \usepackage{siunitx}
 \usepackage{ifthen}
 \usepackage{substr}
+
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}
 
 \newboolean{showuntested}
 \IfSubStringInString{\detokenize{Tested}}{\jobname}{}{\setboolean{showuntested}{true}}
