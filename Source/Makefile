@@ -8,9 +8,7 @@ all: cookbook tested
 cookbook: ../Cookbook.pdf
 
 ../Cookbook.pdf: Cookbook.tex $(wildcard ./entries/*.tex)
-	pdflatex $(OPTIONS) -jobname=Cookbook Cookbook.tex > /dev/null
-	# Compile again for table of contents
-	pdflatex $(OPTIONS) -jobname=Cookbook Cookbook.tex > /dev/null
+	latexmk $(OPTIONS) -pdf -jobname=Cookbook Cookbook.tex > /dev/null
 	mv Cookbook.pdf ../
 	mv Cookbook.synctex.gz ../
 
@@ -18,9 +16,7 @@ cookbook: ../Cookbook.pdf
 tested: ../Cookbook-Tested_only.pdf
 
 ../Cookbook-Tested_only.pdf: Cookbook.tex $(wildcard ./entries/*.tex)
-	pdflatex $(OPTIONS) -jobname=Cookbook-Tested_only $< > /dev/null
-	# Compile again for table of contents
-	pdflatex $(OPTIONS) -jobname=Cookbook-Tested_only $< > /dev/null
+	latexmk $(OPTIONS) -pdf -jobname=Cookbook-Tested_only $< > /dev/null
 	mv Cookbook-Tested_only.pdf ../
 	mv Cookbook-Tested_only.synctex.gz ../
 
