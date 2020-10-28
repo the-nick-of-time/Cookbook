@@ -49,3 +49,7 @@ upload-main: ../Cookbook.pdf
 	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook.pdf
 upload-tested: ../Cookbook-Tested_only.pdf
 	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook-Tested_only.pdf
+
+phone-sync: ../Cookbook.pdf ../Cookbook-Tested_only.pdf
+	kdeconnect-cli --share ../Cookbook.pdf --name "$$PHONE"
+	kdeconnect-cli --share ../Cookbook-Tested_only.pdf --name "$$PHONE"
