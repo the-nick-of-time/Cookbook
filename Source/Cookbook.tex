@@ -32,6 +32,8 @@
 \usepackage{siunitx}
 \usepackage{ifthen}
 \usepackage{substr}
+\usepackage{fp}
+\usepackage{xparse}
 
 \newboolean{showuntested}
 \IfSubStringInString{\detokenize{Tested}}{\jobname}{}{\setboolean{showuntested}{true}}
@@ -44,6 +46,21 @@
 \newcommand{\wwp}{whole wheat pastry flour\xspace}
 \newcommand{\wwb}{whole wheat bread flour\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
+
+\DeclareDocumentCommand{\flour}{ m m g }{%
+\IfNoValueTF{#3}{#2}{\fr{#2}{#3}} % if two arguments, interpret as #2/#3
+cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
+\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 150 * 0 round}
+(\FPprint{\grams} grams) %
+#1 flour}
+
+
+\DeclareDocumentCommand{\yeast}{ m g }{%
+\IfNoValueTF{#2}{#1}{\fr{#1}{#2}} % if two arguments, interpret as #2/#3
+teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
+\FPupn\grams{\IfNoValueTF{#2}{#1}{#2 #1 /} 3.4 * 0 round}
+(\FPprint{\grams} grams) %
+yeast}
 
 \newcommand{\thumbmark}[1]{\addthumb{#1}{\Roman{chapter}}{black}{gray}}
 
