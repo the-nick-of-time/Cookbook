@@ -40,7 +40,12 @@
 
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
 
-\newcommand{\dish}[1]{\subfile{entries/#1}}
+\newcommand{\dish}[1]{%
+\begin{minipage}{\textwidth}%
+\subfile{entries/#1}%
+\end{minipage}
+}
+
 \newcommand{\ap}{all-purpose flour}
 \newcommand{\ww}{whole wheat flour\xspace}
 \newcommand{\wwp}{whole wheat pastry flour\xspace}
@@ -50,7 +55,7 @@
 \DeclareDocumentCommand{\flour}{ m m g }{%
 \IfNoValueTF{#3}{#2}{\fr{#2}{#3}} % if two arguments, interpret as #2/#3
 cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
-\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 150 * 0 round}
+\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 125 * 0 round}
 (\FPprint{\grams} grams) %
 #1 flour}
 
