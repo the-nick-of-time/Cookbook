@@ -1,8 +1,25 @@
-\documentclass[twoside, openany]{book}
+% http://www.texfaq.org/FAQ-compjobnam
+\def\StripPrefix#1>{}
+\def\jobis#1{FF\fi
+  \def\predicate{#1}%
+  \edef\predicate{\expandafter\StripPrefix\meaning\predicate}%
+  \edef\job{\jobname}%
+  \ifx\job\predicate
+}
+
+\if\jobis{Cookbook-Digital}
+	\documentclass{book}
+	\usepackage[margin=.5in]{geometry}
+	\def\showthumb{false}
+\else
+	\documentclass[twoside, openany]{book}
+	\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
+	\def\showthumb{true}
+\fi
+
+
 \usepackage{libertine}
 \usepackage[T1]{fontenc}
-
-\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
 
 \usepackage[contents, nonumber]{cuisine}
 \renewcommand{\recipefont}{\large}
@@ -71,7 +88,7 @@ teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argum
 (\FPprint{\grams} grams) %
 yeast}
 
-\newcommand{\thumbmark}[1]{\addthumb{#1}{\Roman{chapter}}{black}{gray}}
+\newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
 
 % Define a macro for the current chapter name
 %https://tex.stackexchange.com/questions/310046/fancyhdr-and-redefinition-of-leftmark-rightmark
