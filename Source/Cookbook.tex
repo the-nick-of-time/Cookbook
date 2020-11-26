@@ -18,6 +18,7 @@
 \usepackage{subfiles}
 \usepackage[quenya]{tengwarscript}
 \tengmag{1.2}
+\let\footruleskip\undefined
 \usepackage{fancyhdr}
 \usepackage{etoolbox}
 \usepackage{xspace}
@@ -43,7 +44,8 @@
 \newcommand{\dish}[1]{%
 \begin{minipage}{\textwidth}%
 \subfile{entries/#1}%
-\end{minipage}
+\end{minipage}%
+\vfill%
 }
 
 \newcommand{\ap}{all-purpose flour}
@@ -118,6 +120,9 @@ yeast}
 	}
 }
 
+% Otherwise the minipages holding the recipes are indented and extend beyond the right side of the real page
+\setlength{\parindent}{0pt}
+
 
 % TODO: Correct times. At best the current times are approximate.
 
@@ -134,8 +139,6 @@ yeast}
 
 \chapter{Breakfast}
 \thumbmark{Breakfast}
-
-%\mainsetup
 
 
 \section{Egg}
@@ -259,6 +262,8 @@ yeast}
 \dish{SoftBoiledEggs}
 
 \dish{SpaghettiSauce}
+
+\dish{SquashCustard}
 
 \dish{Stuffing}
 
@@ -418,6 +423,8 @@ yeast}
 \dish{ApplePie}
 
 \dish{CherryPie}
+
+\dish{PumpkinPie}
 
 \dish{RhubarbPie}
 
