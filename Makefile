@@ -17,7 +17,7 @@ new:
 .PHONY: view clean all cookbook tested view-main view-tested new
 
 clean:
-	git clean -Xf ..
+	git clean -Xf .
 
 view: view-main view-tested view-digital
 view-main: Cookbook.pdf
