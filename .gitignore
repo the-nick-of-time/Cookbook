@@ -6,6 +6,8 @@
 *.out
 *.tmb
 *.toc
+*.fls
+*.fdb_latexmk
 packages.used
 filtered.tex
 bazel-*

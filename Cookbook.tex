@@ -1,7 +1,25 @@
-\documentclass[twoside, openany]{book}
-\usepackage[T1]{fontenc}
+% http://www.texfaq.org/FAQ-compjobnam
+\def\StripPrefix#1>{}
+\def\jobis#1{FF\fi
+  \def\predicate{#1}%
+  \edef\predicate{\expandafter\StripPrefix\meaning\predicate}%
+  \edef\job{\jobname}%
+  \ifx\job\predicate
+}
 
-\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
+\if\jobis{Cookbook-Digital}
+	\documentclass{book}
+	\usepackage[margin=.5in]{geometry}
+	\def\showthumb{false}
+\else
+	\documentclass[twoside, openany]{book}
+	\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
+	\def\showthumb{true}
+\fi
+
+
+\usepackage{libertine}
+\usepackage[T1]{fontenc}
 
 \usepackage[contents, nonumber]{cuisine}
 \renewcommand{\recipefont}{\large}
@@ -15,8 +33,9 @@
 \hypersetup{colorlinks, citecolor=blue, filecolor=black, linkcolor=black, urlcolor=black}
 
 \usepackage{subfiles}
-% \usepackage[quenya]{tengwarscript}
-% \tengmag{1.2}
+\usepackage[quenya]{tengwarscript}
+\tengmag{1.2}
+\let\footruleskip\undefined
 \usepackage{fancyhdr}
 \usepackage{etoolbox}
 \usepackage{xspace}
@@ -31,6 +50,8 @@
 \usepackage{siunitx}
 \usepackage{ifthen}
 \usepackage{substr}
+\usepackage{fp}
+\usepackage{xparse}
 
 \usepackage{fontspec}
 \setmainfont{Liberation Serif}
@@ -40,14 +61,37 @@
 
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
 
-\newcommand{\dish}[1]{\subfile{entries/#1}}
+\newcommand{\dish}[1]{%
+\begin{minipage}{\textwidth}%
+\subfile{entries/#1}%
+\end{minipage}%
+\vfill%
+}
+% Allow things to pull away from the bottom of the page avoiding weird spacing issues on chapter pages
+\raggedbottom
+
 \newcommand{\ap}{all-purpose flour}
 \newcommand{\ww}{whole wheat flour\xspace}
 \newcommand{\wwp}{whole wheat pastry flour\xspace}
 \newcommand{\wwb}{whole wheat bread flour\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
 
-\newcommand{\thumbmark}[1]{\addthumb{#1}{\Roman{chapter}}{black}{gray}}
+\DeclareDocumentCommand{\flour}{ m m g }{%
+\IfNoValueTF{#3}{#2}{\fr{#2}{#3}} % if two arguments, interpret as #2/#3
+cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
+\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 125 * 0 round}
+(\FPprint{\grams} grams) %
+#1 flour}
+
+
+\DeclareDocumentCommand{\yeast}{ m g }{%
+\IfNoValueTF{#2}{#1}{\fr{#1}{#2}} % if two arguments, interpret as #2/#3
+teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
+\FPupn\grams{\IfNoValueTF{#2}{#1}{#2 #1 /} 3.4 * 0 round}
+(\FPprint{\grams} grams) %
+yeast}
+
+\newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
 
 % Define a macro for the current chapter name
 %https://tex.stackexchange.com/questions/310046/fancyhdr-and-redefinition-of-leftmark-rightmark
@@ -97,6 +141,9 @@
 	}
 }
 
+% Otherwise the minipages holding the recipes are indented and extend beyond the right side of the real page
+\setlength{\parindent}{0pt}
+
 
 % TODO: Correct times. At best the current times are approximate.
 
@@ -123,6 +170,8 @@
 \section{Not Egg}
 
 \dish{Pancakes}
+
+\dish{SausageGravy}
 
 \untested{\dish{SavoryOatmeal}}
 
@@ -385,6 +434,8 @@
 \dish{ApplePie}
 
 \dish{CherryPie}
+
+\dish{PumpkinPie}
 
 \dish{RhubarbPie}
 
