@@ -10,3 +10,4 @@
 *.fdb_latexmk
 packages.used
 filtered.tex
+*.zip

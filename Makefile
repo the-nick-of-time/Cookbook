@@ -13,8 +13,12 @@ digital: Cookbook-Digital.pdf
 new:
 	"$(PWD)/interactive.sh"
 
+Cookbook.zip: Cookbook.pdf Cookbook-Tested.pdf Cookbook-Digital.pdf
+	zip $@ $^
 
-.PHONY: view clean all cookbook tested view-main view-tested new
+zip: Cookbook.zip
+
+.PHONY: view clean all cookbook tested view-main view-tested new zip
 
 clean:
 	git clean -Xf .
