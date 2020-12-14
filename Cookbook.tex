@@ -15,13 +15,14 @@
 	\documentclass[twoside, openany]{book}
 	\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
 	\def\showthumb{true}
-	\usepackage{ifthen}
-	\newboolean{showuntested}
-	\if\jobis{Cookbook-Tested}
-		\setboolean{showuntested}{false}
-	\else
-		\setboolean{showuntested}{true}
-	\fi
+\fi
+
+\usepackage{ifthen}
+\newboolean{showuntested}
+\if\jobis{Cookbook-Tested}
+	\setboolean{showuntested}{false}
+\else
+	\setboolean{showuntested}{true}
 \fi
 
 
