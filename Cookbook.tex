@@ -71,14 +71,14 @@
 % Allow things to pull away from the bottom of the page avoiding weird spacing issues on chapter pages
 \raggedbottom
 
-\newcommand{\ap}{all-purpose flour}
-\newcommand{\ww}{whole wheat flour\xspace}
-\newcommand{\wwp}{whole wheat pastry flour\xspace}
-\newcommand{\wwb}{whole wheat bread flour\xspace}
+\newcommand{\ap}{all-purpose\xspace}
+\newcommand{\ww}{whole wheat\xspace}
+\newcommand{\wwp}{whole wheat pastry\xspace}
+\newcommand{\wwb}{whole wheat bread\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
 
 \DeclareDocumentCommand{\flour}{ m m g }{%
-\IfNoValueTF{#3}{#2}{\fr{#2}{#3}} % if two arguments, interpret as #2/#3
+\IfNoValueTF{#3}{#2}{\fr{{#2}}{{#3}}} % if two arguments, interpret as #2/#3
 cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
 \FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 150 * 0 round}%
 (\FPprint{\grams} grams) %
