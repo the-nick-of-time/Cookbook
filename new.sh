@@ -24,8 +24,8 @@ cat <<< "\\documentclass[../Cookbook.tex]{subfiles}
 
 \\begin{document}
 
-\\begin{recipe}[$(label)]{\\textbf{$title}}{$yield}{$time}
-	
+\\begin{recipe}[$(label)]{$title}{$yield}{$time}
+
 \\end{recipe}
 
 \\end{document}
