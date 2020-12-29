@@ -91,6 +91,10 @@ teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argum
 (\FPprint{\grams} grams) %
 yeast}
 
+\newcommand{\tempf}[1]{#1\0F (%
+\FPeval\celsiusvalue{round((#1 - 32) * ( 5. / 9 ), 0)}%
+\FPprint{\celsiusvalue}\0C)}
+
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
 
 % Define a macro for the current chapter name
@@ -488,7 +492,7 @@ yeast}
 
 \section{Cake}
 
-\dish{BaseDessertBread}
+\untested{\dish{BaseDessertBread}}
 
 \dish{ChocolateCake}
 
