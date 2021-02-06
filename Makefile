@@ -23,21 +23,19 @@ zip: Cookbook.zip
 clean:
 	git clean -Xf .
 
-view: view-main view-tested view-digital
-view-main: Cookbook.pdf
-	xdg-open $<
-view-tested: Cookbook-Tested.pdf
-	xdg-open $<
-view-digital: Cookbook-Digital.pdf
-	xdg-open $<
+view: view-Cookbook.pdf view-Cookbook-Tested.pdf view-Cookbook-Digital.pdf
+view-%:
+	# $* evaluates to nothing at the point it is evaluated in the dependency list
+	# so normal dependencies don't work
+	$(MAKE) $*
+	xdg-open $*
 
-upload: upload-main upload-tested upload-digital
-upload-main: Cookbook.pdf
-	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/$<
-upload-tested: Cookbook-Tested.pdf
-	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/$<
-upload-digital: Cookbook-Digital.pdf
-	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/$<
+upload: upload-Cookbook.pdf upload-Cookbook-Tested.pdf upload-Cookbook-Digital.pdf
+view-%:
+	# $* evaluates to nothing at the point it is evaluated in the dependency list
+	# so normal dependencies don't work
+	$(MAKE) $*
+	rsync --chown=server:server --chmod=444 $* doksta:/var/www/files/$*
 
 phone-sync: Cookbook.pdf Cookbook-Tested.pdf Cookbook-Digital.pdf
 	for file in $^ ; do kdeconnect-cli --share $$file --name "$$PHONE" ; done
