@@ -31,7 +31,7 @@ view-%:
 	xdg-open $*
 
 upload: upload-Cookbook.pdf upload-Cookbook-Tested.pdf upload-Cookbook-Digital.pdf
-view-%:
+upload-%:
 	# $* evaluates to nothing at the point it is evaluated in the dependency list
 	# so normal dependencies don't work
 	$(MAKE) $*
