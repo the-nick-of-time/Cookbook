@@ -24,6 +24,11 @@ release: $(OUTS)
 		-l the-nick-of-time -t $$(cat ~/code/github_api_key) \
 		-o the-nick-of-time -r Cookbook \
 		-d $$(git describe --tags --abbrev=0) \
+		-c create
+	./github-release-api/github_release_manager.sh \
+		-l the-nick-of-time -t $$(cat ~/code/github_api_key) \
+		-o the-nick-of-time -r Cookbook \
+		-d $$(git describe --tags --abbrev=0) \
 		-c upload $^
 
 .PHONY: view clean all cookbook tested view-main view-tested new zip
