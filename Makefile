@@ -13,29 +13,29 @@ digital: Cookbook-Digital.pdf
 new:
 	"$(PWD)/interactive.sh"
 
+Cookbook.zip: Cookbook.pdf Cookbook-Tested.pdf Cookbook-Digital.pdf
+	zip $@ $^
 
-.PHONY: view clean all cookbook tested view-main view-tested new
+zip: Cookbook.zip
+
+.PHONY: view clean all cookbook tested view-main view-tested new zip
 
 clean:
 	git clean -Xf .
 
-view: view-main view-tested view-digital
-view-main: Cookbook.pdf
-	xdg-open Cookbook.pdf
-view-tested: Cookbook-Tested.pdf
-	xdg-open Cookbook-Tested.pdf
-view-digital: Cookbook-Digital.pdf
-	xdg-open $<
+view: view-Cookbook.pdf view-Cookbook-Tested.pdf view-Cookbook-Digital.pdf
+view-%:
+	# $* evaluates to nothing at the point it is evaluated in the dependency list
+	# so normal dependencies don't work
+	$(MAKE) $*
+	xdg-open $*
 
-upload: upload-main upload-tested upload-digital
-upload-main: Cookbook.pdf
-	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook.pdf
-upload-tested: Cookbook-Tested.pdf
-	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook-Tested.pdf
-upload-digital: Cookbook-Digital.pdf
-	rsync --chown=server:server --chmod=444 $< doksta:/var/www/files/Cookbook-Digital.pdf
+upload: upload-Cookbook.pdf upload-Cookbook-Tested.pdf upload-Cookbook-Digital.pdf
+upload-%:
+	# $* evaluates to nothing at the point it is evaluated in the dependency list
+	# so normal dependencies don't work
+	$(MAKE) $*
+	rsync --chown=server:server --chmod=444 $* doksta:/var/www/files/$*
 
 phone-sync: Cookbook.pdf Cookbook-Tested.pdf Cookbook-Digital.pdf
-	kdeconnect-cli --share Cookbook.pdf --name "$$PHONE"
-	kdeconnect-cli --share Cookbook-Tested.pdf --name "$$PHONE"
-	kdeconnect-cli --share Cookbook-Digital.pdf --name "$$PHONE"
+	for file in $^ ; do kdeconnect-cli --share $$file --name "$$PHONE" ; done

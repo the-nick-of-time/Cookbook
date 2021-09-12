@@ -8,13 +8,21 @@
 }
 
 \if\jobis{Cookbook-Digital}
-	\documentclass{book}
+	\documentclass[openany]{book}
 	\usepackage[margin=.5in]{geometry}
 	\def\showthumb{false}
 \else
 	\documentclass[twoside, openany]{book}
 	\usepackage[top=1in, bottom=1in, inner=1in, outer=.5in]{geometry}
 	\def\showthumb{true}
+\fi
+
+\usepackage{ifthen}
+\newboolean{showuntested}
+\if\jobis{Cookbook-Tested}
+	\setboolean{showuntested}{false}
+\else
+	\setboolean{showuntested}{true}
 \fi
 
 
@@ -37,27 +45,19 @@
 \tengmag{1.2}
 \let\footruleskip\undefined
 \usepackage{fancyhdr}
-\usepackage{etoolbox}
 \usepackage{xspace}
 \usepackage{thumbs}
 \usepackage{tabularx}
 \def\arraystretch{1.25}
 \def\belowcaptionskip{0.2em}
 \usepackage{hhline}
-\usepackage{diagbox}
+\usepackage{slashbox}
 \usepackage{nicefrac}
 \let\fr\nicefrac
 \usepackage{siunitx}
-\usepackage{ifthen}
-\usepackage{substr}
 \usepackage{fp}
 \usepackage{xparse}
 
-\usepackage{fontspec}
-\setmainfont{Liberation Serif}
-
-\newboolean{showuntested}
-\IfSubStringInString{\detokenize{Tested}}{\jobname}{}{\setboolean{showuntested}{true}}
 
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
 
@@ -70,16 +70,16 @@
 % Allow things to pull away from the bottom of the page avoiding weird spacing issues on chapter pages
 \raggedbottom
 
-\newcommand{\ap}{all-purpose flour}
-\newcommand{\ww}{whole wheat flour\xspace}
-\newcommand{\wwp}{whole wheat pastry flour\xspace}
-\newcommand{\wwb}{whole wheat bread flour\xspace}
+\newcommand{\ap}{all-purpose\xspace}
+\newcommand{\ww}{whole wheat\xspace}
+\newcommand{\wwp}{whole wheat pastry\xspace}
+\newcommand{\wwb}{whole wheat bread\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
 
 \DeclareDocumentCommand{\flour}{ m m g }{%
-\IfNoValueTF{#3}{#2}{\fr{#2}{#3}} % if two arguments, interpret as #2/#3
+\IfNoValueTF{#3}{#2}{\fr{{#2}}{{#3}}} % if two arguments, interpret as #2/#3
 cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
-\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 125 * 0 round}
+\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 150 * 0 round}%
 (\FPprint{\grams} grams) %
 #1 flour}
 
@@ -87,9 +87,13 @@ cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument a
 \DeclareDocumentCommand{\yeast}{ m g }{%
 \IfNoValueTF{#2}{#1}{\fr{#1}{#2}} % if two arguments, interpret as #2/#3
 teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
-\FPupn\grams{\IfNoValueTF{#2}{#1}{#2 #1 /} 3.4 * 0 round}
+\FPupn\grams{\IfNoValueTF{#2}{#1}{#2 #1 /} 3.4 * 0 round}%
 (\FPprint{\grams} grams) %
 yeast}
+
+\newcommand{\tempf}[1]{#1\0F (%
+\FPeval\celsiusvalue{round((#1 - 32) * ( 5. / 9 ), 0)}%
+\FPprint{\celsiusvalue}\0C)}
 
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
 
@@ -110,6 +114,7 @@ yeast}
 
 \fancypagestyle{main}{
 	\fancyhf{}
+%	\fancyfoot{}
 	\renewcommand{\headrulewidth}{0pt}
 	\setlength{\footskip}{.6in}
 	\pagenumbering{arabic}
@@ -145,6 +150,10 @@ yeast}
 \setlength{\parindent}{0pt}
 
 
+\title{Family Cookbook}
+\author{Thurmes Family}
+
+
 % TODO: Correct times. At best the current times are approximate.
 
 \begin{document}
@@ -154,7 +163,6 @@ yeast}
 {
 	\bfseries \tableofcontents
 }
-
 
 \mainsetup
 
@@ -169,12 +177,11 @@ yeast}
 
 \section{Not Egg}
 
-\dish{Pancakes}
-
 \dish{SausageGravy}
 
 \untested{\dish{SavoryOatmeal}}
 
+\dish{SpicedPancakes}
 
 
 
@@ -188,15 +195,31 @@ yeast}
 
 \dish{AlmondChickenAndRice}
 
-\dish{BeefPasties}
+\dish{BabyBackRibs}
+
+\untested{\dish{BakedMacAndCheese}}
+
+\dish{BakedRavioli}
 
 \dish{BeefRoast}
 
 \dish{BeefStew}
 
+\untested{\dish{BiscuitsAndGravy}}
+
 \dish{BLTs}
 
 \dish{BroccoliCheeseSoup}
+
+\untested{\dish{Bulgogi}}
+
+\untested{\dish{CaramelizedOnionMushroomAndBeefCalzones}}
+
+\dish{ChickenAndDumplingSoup}
+
+\untested{\dish{ChickenBreastsWithSteamRoastedParsnips}}
+
+\untested{\dish{ChickenWithOreganoAndMushrooms}}
 
 \dish{ChuckwagonCasserole}
 
@@ -206,70 +229,72 @@ yeast}
 
 \dish{GreenTortellini}
 
+\dish{HamburgerPasties}
+
 \dish{Hamburgers}
+
+\untested{\dish{JasmineRiceEdamameAppleBowls}}
+
+\untested{\dish{LentilBolognese}}
 
 \dish{MongolianBeef}
 
-\dish{PadThai}
+\untested{\dish{NuttyPortobelloChili}}
+
+\untested{\dish{OnePanBakedChicken}}
+
+\untested{\dish{OvenFriedChicken}}
+
+\untested{\dish{PadThai}}
 
 \dish{ParmesanChicken}
 
-\dish{Ribs}
-
 \dish{RosemaryChicken}
+
+\untested{\dish{SageBreadedChicken}}
 
 \dish{SalamiCheeseStromboli}
 
+\untested{\dish{SesameGingerPorkAndQuinoa}}
+
+\untested{\dish{SlowCookerChanaMasala}}
+
+\dish{ShepherdsPie}
+
 \dish{Spaghetti}
 
+\untested{\dish{SpicyJambalaya}}
+
 \dish{SquashSoup}
+
+\untested{\dish{SrirachaChicken}}
 
 \dish{StirFry}
 
 \dish{ThanksgivingDinner}
 
+\untested{\dish{TurkeySageMeatballs}}
+
+\untested{\dish{VegetarianBeanChili}}
+
+\untested{\dish{VegetarianChili}}
+
 \dish{WaxBeanSoup}
 
 \untested{\dish{WashtunkalaStew}}
 
-\untested{\dish{ParsnipsAndChicken}}
-
-\untested{\dish{Jambalaya}}
-
-\untested{\dish{PortobelloChili}}
-
-\untested{\dish{OreganoMushroomChicken}}
-
-\untested{\dish{TurkeySageMeatballs}}
-
-\untested{\dish{SesameGingerPorkAndQuinoa}}
-
-\untested{\dish{RiceEdamameAppleBowls}}
-
-\untested{\dish{SageBreadedChicken}}
-
-\untested{\dish{SrirachaChicken}}
-
-\untested{\dish{OnePanChicken}}
-
-\untested{\dish{OnionBeefCalzone}}
-
-\untested{\dish{OvenFriedChicken}}
-
-\untested{\dish{LentilBolognese}}
-
-\untested{\dish{ChanaMasala}}
-
-\untested{\dish{Bulgogi}}
-
-\untested{\dish{BakedMacAndCheese}}
-
 
 \section{Components}
 
-\dish{Pasta}
+\dish{BasicPastaDough}
 
-\dish{Pesto}
+\dish{BasilPesto}
+
+\dish{Dumplings}
+
+\untested{\dish{LimeGingerVinaigrette}}
+
+\untested{\dish{PeanutSauce}}
 
 \dish{PizzaSauce}
 
@@ -283,13 +308,9 @@ yeast}
 
 \dish{SquashCustard}
 
-\dish{Stuffing}
+\dish{ThanksgivingStuffing}
 
 \dish{WholeWheatPizzaDough}
-
-\untested{\dish{LimeGingerVinaigrette}}
-
-\untested{\dish{PeanutSauce}}
 
 
 
@@ -304,13 +325,21 @@ yeast}
 
 \dish{Biscuits}
 
+\untested{\dish{CheddarChiveCornbread}}
+
 \dish{Cornbread}
 
 \dish{DinnerRolls}
 
-\untested{\dish{CheddarChiveCornbread}}
+\untested{\dish{HoneyWheatRolls}}
 
-\untested{\dish{SquashCornMuffins}}
+\dish{OatBuns}
+
+\untested{\dish{SouthernButtermilkBiscuits}}
+
+\untested{\dish{SweetSquashCornMuffins}}
+
+\untested{\dish{WhiteBread}}
 
 
 \section{Fruits and Vegetables}
@@ -327,6 +356,8 @@ yeast}
 
 \dish{FruitSalad}
 
+\dish{GarlicPotatoes}
+
 \dish{GreenBeans}
 
 \dish{GreenBeansWithCream}
@@ -337,9 +368,9 @@ yeast}
 
 \dish{MashedPotatoesInstantPot}
 
-\dish{RoastVegetables}
-
 \untested{\dish{RoastPotatoesMetric}}
+
+\dish{RoastVegetables}
 
 
 
@@ -351,37 +382,43 @@ yeast}
 
 \section{Smoothies}
 
-\dish{BerrySmoothie}
+\untested{\dish{GreenTeaSmoothie}}
 
-\dish{GreenTeaSmoothie}
+\dish{MixedBerrySmoothie}
 
 
 \section{Dips}
 
 \dish{BlackBeanDip}
 
-\dish{Salsa}
-
 \untested{\dish{NutDip}}
 
 \untested{\dish{PumpkinButter}}
 
+\dish{SerranoSalsa}
+
+
+\section{Morsels}
+
+\dish{Popcorn}
 
 
 
 
 
 \chapter{Desserts}
-\addthumb{Desserts}{\Roman{chapter}}{black}{gray}
+\thumbmark{Desserts}
 
 
 \section{Cookies}
 
-\dish{BrownButterChocolateChipCookies}
-
 \dish{BethsButterSugarCookies}
 
-\dish{C4Cookies}
+\dish{BrownButterChocolateChipCookies}
+
+\untested{\dish{ChocolatePeanutTartlets}}
+
+\dish{CoconutChocolateChocolateChipCookies}
 
 \dish{Gingerbread}
 
@@ -391,75 +428,82 @@ yeast}
 
 \dish{PumpkinCookies}
 
-\dish{Snickerdoodles}
+\dish{RussianTeaCakes}
 
-\untested{\dish{ChocolatePeanutTartlets}}
+\untested\dish{Snickerdoodles}
 
 
 \section{Quick Breads}
 
 \dish{BananaBread}
 
+\untested{\dish{BlueberryWalnutMuffins}}
+
+\untested{\dish{FudgyBrownies}}
+
+\untested{\dish{GingerBiscuits}}
+
+\dish{Lembas}
+
 \dish{OrangeBread}
 
+\untested{\dish{NutellaBrownies}}
+
 \dish{PumpkinBread}
+
+\untested{\dish{PumpkinWalnutMuffins}}
+
+\untested{\dish{RaspberryScones}}
+
+\untested{\dish{RedVelvetBrownies}}
 
 \dish{RhubarbCoffeeCake}
 
 \dish{Scones}
-
-\untested{\dish{Baklava}}
-
-\untested{\dish{GingerBiscuits}}
-
-\untested{\dish{PumpkinWalnutMuffins}}
-
-\untested{\dish{BlueberryWalnutMuffins}}
-
-\untested{\dish{RedVelvetBrownies}}
-
-\untested{\dish{FudgyBrownies}}
-
-\untested{\dish{Lembas}}
-
-\untested{\dish{NutellaBrownies}}
-
-\untested{\dish{RaspberryScones}}
 
 
 \section{Pies}
 
 \dish{PieDough}
 
-\dish{ApplePie}
+\dish{DeepDishApplePie}
 
-\dish{CherryPie}
+\dish{DeepDishCherryPie}
+
+\untested{\dish{FreshBlueberryTart}}
 
 \dish{PumpkinPie}
 
-\dish{RhubarbPie}
+\dish{DeepDishRhubarbPie}
 
-\untested{\dish{BlueberryTart}}
 
 
 \section{Fruit Desserts}
+
+\dish{Apfelkuchen}
 
 \dish{BakedApples}
 
 \dish{BerryCrumble}
 
+\untested{\dish{BerryJam}}
+
 \untested{\dish{BoiledApples}}
+
+\untested{\dish{CherryRaspberrySorbet}}
 
 \untested{\dish{CoconutRicePudding}}
 
 \untested{\dish{LemonBars}}
 
-\untested{\dish{CherryRaspberrySorbet}}
-
-\untested{\dish{BerryJam}}
-
 
 \section{Sides and Toppings}
+
+\untested{\dish{Baklava}}
+
+\untested{\dish{ChocolateFudge}}
+
+\untested{\dish{Macaroons}}
 
 \dish{RhubarbSauce}
 
@@ -468,17 +512,19 @@ yeast}
 
 \section{Cake}
 
+\untested{\dish{BaseDessertBread}}
+
 \dish{ChocolateCake}
 
-\dish{ButtercreamFrosting}
+\dish{ChocolateButtercreamFrosting}
 
-\untested{\dish{CranberryCake}}
+\untested{\dish{CinnamonRolls}}
+
+\untested{\dish{CinnamonStar}}
+
+\untested{\dish{CranberryNutCake}}
 
 \untested{\dish{RaspberryCheesecake}}
-
-
-
-
 
 
 \chapter{Appendix}
@@ -492,7 +538,7 @@ yeast}
 	\label{tab:volume}
 	\caption{Volume}
 	\begin{tabular}{c||c|c|c|c|c}
-		\diagbox[dir=NW]{One}{Is this many}& \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} & \textbf{mL} \\ \hhline{=#=|=|=|=|=}
+		\backslashbox{One}{Is this many}& \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} & \textbf{mL} \\ \hhline{=#=|=|=|=|=}
 		\textbf{Teaspoon}               &         1         &        \fr13        &      \fr{1}{12}      &  \fr{1}{48}  &     5       \\ \hline
 		\textbf{Tablespoon}             &         3         &          1          &        \fr12         &  \fr{1}{16}  &    15       \\ \hline
 		\textbf{Fluid Ounce}            &        12         &          2          &          1           &    \fr18     &    30       \\ \hline
@@ -510,7 +556,9 @@ yeast}
 
 1 liter = 34 fluid ounces $\approx$ 1 quart
 
-1 teaspoon yeast = 0.1 ounces = 3.4 grams
+1 packet yeast = \fr52 teaspoons = 9 grams
+
+% 1 teaspoon yeast = 0.1 ounces = 3.4 grams
 
 \begin{table}[h]
 	\centering
@@ -554,6 +602,23 @@ yeast}
 	\end{tabular}
 \end{table}
 
+
+\begin{table}[ht]
+	\centering
+	\label{tab:density}
+	\caption{Densities of common ingredients}
+	\begin{tabular}{c|c|c}
+		     Ingredient      & \fr{g}{cup} & \fr{g}{tablespoon} \\ \hline
+		  Granulated sugar   &     190     &         12         \\
+		Brown sugar (packed) &     200     &        12.5        \\
+		       Butter        &     230     &         14         \\
+		       Water         &     240     &         15         \\
+		       Flour         &     150     &        9.5         \\
+		        Milk         &     250     &         16         \\
+		       Honey         &     340     &         21         \\
+		      Cornmeal       &     140     &        8.75
+	\end{tabular}
+\end{table}
 
 
 \end{document}

@@ -11,3 +11,4 @@
 packages.used
 filtered.tex
 bazel-*
+*.zip
