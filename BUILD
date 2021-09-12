@@ -17,21 +17,12 @@ filegroup(
         "@bazel_latex//packages:tabularx",
         "@bazel_latex//packages:etoolbox",
         "@bazel_latex//packages:thumbs",
-        # "@bazel_latex//packages:tengwarscript",
-        # ":unzip_font",
         "@bazel_latex//packages:diagbox",
         "@bazel_latex//packages:hhline",
         "@bazel_latex//packages:nicefrac",
         "@bazel_latex//packages:siunitx",
         "@bazel_latex//packages:substr",
     ],
-)
-
-genrule(
-    name = "unzip_font",
-    srcs = ["@tengwar_quenya//file"],
-    outs = ["QUENYA.TTF"],
-    cmd = "unzip $(location @tengwar_quenya//file) -d $$(dirname $(location :QUENYA.TTF))"
 )
 
 latex_document(
@@ -45,6 +36,15 @@ latex_document(
 
 latex_document(
     name = "Cookbook_Tested",
+    main = "Cookbook.tex",
+    srcs = [
+        ":recipes",
+        ":packages",
+    ]
+)
+
+latex_document(
+    name = "Cookbook_Digital",
     main = "Cookbook.tex",
     srcs = [
         ":recipes",
