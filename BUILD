@@ -35,7 +35,7 @@ latex_document(
 )
 
 latex_document(
-    name = "Cookbook_Tested",
+    name = "Cookbook-Tested",
     main = "Cookbook.tex",
     srcs = [
         ":recipes",
@@ -44,7 +44,7 @@ latex_document(
 )
 
 latex_document(
-    name = "Cookbook_Digital",
+    name = "Cookbook-Digital",
     main = "Cookbook.tex",
     srcs = [
         ":recipes",
