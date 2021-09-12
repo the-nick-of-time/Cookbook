@@ -1,0 +1,425 @@
+diff --git packages/BUILD.bazel packages/BUILD.bazel
+index 4b4dc7e..3edf25f 100644
+--- packages/BUILD.bazel
++++ packages/BUILD.bazel
+@@ -165,6 +165,12 @@ latex_package(
+     tests = ["colortbl_test.tex"],
+ )
+ 
++latex_package(
++    name = "cuisine",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__cuisine"],
++    tests = ["cuisine_test.tex"],
++)
++
+ latex_package(
+     name = "csquotes",
+     srcs = [
+@@ -238,6 +244,18 @@ latex_package(
+     tests = ["datetime2_english_test.tex"],
+ )
+ 
++latex_package(
++    name = "diagbox",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__diagbox",
++        ":pict2e",
++        ":fp",
++        ":calc",
++        ":array"
++    ],
++    tests = ["diagbox_test.tex"],
++)
++
+ latex_package(
+     name = "drawstack",
+     srcs = [
+@@ -367,6 +385,12 @@ latex_package(
+     tests = ["fontspec_test.tex"],
+ )
+ 
++latex_package(
++    name = "footmisc",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__footmisc"],
++    tests = ["footmisc_test.tex"],
++)
++
+ latex_package(
+     name = "fp",
+     srcs = ["@texlive_texmf__texmf-dist__tex__latex__fp"],
+@@ -471,6 +495,12 @@ latex_package(
+     tests = ["helvet_test.tex"],
+ )
+ 
++latex_package(
++    name = "hhline",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__tools"],
++    tests = ["hhline_test.tex"],
++)
++
+ latex_package(
+     name = "hyperref",
+     srcs = [
+@@ -574,6 +604,19 @@ latex_package(
+     tests = ["l3keys2e_test.tex"],
+ )
+ 
++latex_package(
++    name = "libertine",
++    srcs = [
++        "@texlive_texmf__texmf-dist__fonts__tfm__public__libertine",
++        "@texlive_texmf__texmf-dist__fonts__type1__public__libertine",
++        "@texlive_texmf__texmf-dist__fonts__opentype__public__libertine",
++        "@texlive_texmf__texmf-dist__tex__latex__libertine",
++        ":xkeyval",
++        ":fontspec",
++    ],
++    tests = ["libertine_test.tex"],
++)
++
+ latex_package(
+     name = "listings",
+     srcs = [
+@@ -583,6 +626,14 @@ latex_package(
+     tests = ["listings_test.tex"],
+ )
+ 
++latex_package(
++    name = "luaotfload",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__luaotfload",
++    ],
++    tests = ["luaotfload_test.tex"],
++)
++
+ latex_package(
+     name = "longtable",
+     srcs = [":tools"],
+@@ -713,12 +764,33 @@ latex_package(
+     tests = ["multicol_test.tex"],
+ )
+ 
++latex_package(
++    name = "nicefrac",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__units"],
++    tests = ["nicefrac_test.tex"],
++)
++
+ latex_package(
+     name = "nth",
+     srcs = [":genmisc"],
+     tests = ["nth_test.tex"],
+ )
+ 
++latex_package(
++    name = "pagecolor",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__pagecolor"],
++    tests = ["pageslts_test.tex"],
++)
++
++latex_package(
++    name = "pageslts",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__pageslts",
++        ":undolabl",
++    ],
++    tests = ["pageslts_test.tex"],
++)
++
+ latex_package(
+     name = "parskip",
+     srcs = [
+@@ -770,6 +842,12 @@ latex_package(
+     tests = ["placeins_test.tex"],
+ )
+ 
++latex_package(
++    name = "pict2e",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__pict2e"],
++    tests = ["pict2e_test.tex"],
++)
++
+ latex_package(
+     name = "silence",
+     srcs = ["@texlive_texmf__texmf-dist__tex__latex__silence"],
+@@ -833,6 +911,12 @@ latex_package(
+     tests = ["subcaption_test.tex"],
+ )
+ 
++latex_package(
++    name = "subfiles",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__subfiles"],
++    tests = ["subfiles_test.tex", "subfiles_child_test.tex"],
++)
++
+ latex_package(
+     name = "substr",
+     srcs = ["@texlive_texmf__texmf-dist__tex__latex__substr"],
+@@ -845,6 +929,15 @@ latex_package(
+     tests = ["svn-prov_test.tex"],
+ )
+ 
++latex_package(
++    name = "tablefootnote",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__tablefootnote",
++        ":xifthen"
++    ],
++    tests = ["tablefootnote_test.tex"],
++)
++
+ latex_package(
+     name = "tabularx",
+     srcs = [":tools"],
+@@ -872,12 +965,30 @@ latex_package(
+     tests = ["tcolorbox_test.tex"],
+ )
+ 
++latex_package(
++    name = "tengwarscript",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__tengwarscript",
++        ":fp",
++    ],
++    # tests = ["tengwarscript_test.tex"],
++)
++
+ latex_package(
+     name = "textcase",
+     srcs = ["@texlive_texmf__texmf-dist__tex__latex__textcase"],
+     tests = ["textcase_test.tex"],
+ )
+ 
++latex_package(
++    name = "tipa",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__tipa",
++        "@texlive_texmf__texmf-dist__fonts__tfm__public__tipa",
++    ],
++    tests = ["tipa_test.tex"],
++)
++
+ latex_package(
+     name = "tgheros",
+     srcs = [
+@@ -888,6 +999,18 @@ latex_package(
+     tests = ["tgheros_test.tex"],
+ )
+ 
++latex_package(
++    name = "thumbs",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__latex__thumbs",
++        ":xcolor",
++        ":pageslts",
++        ":everyshi",
++        ":pagecolor",
++    ],
++    # tests = ["thumbs_test.tex"],
++)
++
+ latex_package(
+     name = "tikz",
+     srcs = [":pgf"],
+@@ -950,6 +1073,12 @@ latex_package(
+     tests = ["ulem_test.tex"],
+ )
+ 
++latex_package(
++    name = "undolabl",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__undolabl"],
++    tests = ["undolabl_test.tex"],
++)
++
+ latex_package(
+     name = "unicode-math",
+     srcs = [
+@@ -991,6 +1120,12 @@ latex_package(
+     tests = ["verbatim_test.tex"],
+ )
+ 
++latex_package(
++    name = "wrapfig",
++    srcs = ["@texlive_texmf__texmf-dist__tex__latex__wrapfig"],
++    tests = ["wrapfig_test.tex"],
++)
++
+ latex_package(
+     name = "xcharter",
+     srcs = [
+diff --git packages/cuisine_test.tex packages/cuisine_test.tex
+new file mode 100644
+index 0000000..0065c47
+--- /dev/null
++++ packages/cuisine_test.tex
+@@ -0,0 +1,8 @@
++\documentclass{article}
++\usepackage{cuisine}
++\begin{document}
++\begin{recipe}[corn]{Corn on the Cob}{1 serving}{5 minutes}
++    \Ingredient{Corn cob}
++    Steam for a few minutes.
++\end{recipe}
++\end{document}
+\ No newline at end of file
+diff --git packages/diagbox_test.tex packages/diagbox_test.tex
+new file mode 100644
+index 0000000..6134af7
+--- /dev/null
++++ packages/diagbox_test.tex
+@@ -0,0 +1,8 @@
++\documentclass{article}
++\usepackage{diagbox}
++\begin{document}
++    \begin{tabular}{c|c|c}
++        \diagbox{Bottom}{Top} & col 1 & col 2 \\
++        row label & row 1 col 1 & row 1 col 2
++    \end{tabular}
++\end{document}
+\ No newline at end of file
+diff --git packages/hhline_test.tex packages/hhline_test.tex
+new file mode 100644
+index 0000000..97de453
+--- /dev/null
++++ packages/hhline_test.tex
+@@ -0,0 +1,9 @@
++\documentclass{article}
++\usepackage{hhline}
++\begin{document}
++    \begin{tabular}{c|c|c}
++         & col 1 & col 2 \\
++         \hhline{=|=|=}
++        row label & row 1 col 1 & row 1 col 2
++    \end{tabular}
++\end{document}
+\ No newline at end of file
+diff --git packages/libertine_test.tex packages/libertine_test.tex
+new file mode 100644
+index 0000000..e742c03
+--- /dev/null
++++ packages/libertine_test.tex
+@@ -0,0 +1,5 @@
++\documentclass{article}
++\usepackage{libertine}
++\begin{document}
++This text should be in the libertine font.
++\end{document}
+diff --git packages/nicefrac_test.tex packages/nicefrac_test.tex
+new file mode 100644
+index 0000000..896b5db
+--- /dev/null
++++ packages/nicefrac_test.tex
+@@ -0,0 +1,5 @@
++\documentclass{article}
++\usepackage{nicefrac}
++\begin{document}
++    \nicefrac{1}{4}
++\end{document}
+\ No newline at end of file
+diff --git packages/pagecolor_test.tex packages/pagecolor_test.tex
+new file mode 100644
+index 0000000..ce26167
+--- /dev/null
++++ packages/pagecolor_test.tex
+@@ -0,0 +1,5 @@
++\documentclass{article}
++\usepackage{pagecolor}
++\begin{document}
++    \thepagecolor
++\end{document}
+\ No newline at end of file
+diff --git packages/pageslts_test.tex packages/pageslts_test.tex
+new file mode 100644
+index 0000000..fcc45fa
+--- /dev/null
++++ packages/pageslts_test.tex
+@@ -0,0 +1,7 @@
++\documentclass{article}
++\usepackage{pageslts}
++\begin{document}
++    \pageref{LastPage}
++    \newpage
++    stuff on the last page
++\end{document}
+\ No newline at end of file
+diff --git packages/pict2e_test.tex packages/pict2e_test.tex
+new file mode 100644
+index 0000000..cfc4edf
+--- /dev/null
++++ packages/pict2e_test.tex
+@@ -0,0 +1,5 @@
++\documentclass{article}
++\usepackage{pict2e}
++\begin{document}
++    
++\end{document}
+\ No newline at end of file
+diff --git packages/subfiles_child_test.tex packages/subfiles_child_test.tex
+new file mode 100644
+index 0000000..94cdd7c
+--- /dev/null
++++ packages/subfiles_child_test.tex
+@@ -0,0 +1,4 @@
++\documentclass[subfiles_test.tex]{subfiles}
++\begin{document}
++included file
++\end{document}
+diff --git packages/subfiles_test.tex packages/subfiles_test.tex
+new file mode 100644
+index 0000000..194d359
+--- /dev/null
++++ packages/subfiles_test.tex
+@@ -0,0 +1,8 @@
++\documentclass{article}
++\usepackage{subfiles}
++
++\begin{document}
++    main document
++
++    \subfile{subfiles_child_test.tex}
++\end{document}
+\ No newline at end of file
+diff --git packages/tengwarscript_test.tex packages/tengwarscript_test.tex
+new file mode 100644
+index 0000000..8fe7924
+--- /dev/null
++++ packages/tengwarscript_test.tex
+@@ -0,0 +1,8 @@
++\documentclass{article}
++\usepackage[quenya]{tengwarscript}
++
++\begin{document}
++    \begin{tengwar}
++        \Tlambe \TTacute \Tumbar \TTthreedots \Tsilme
++    \end{tengwar}
++\end{document}
+\ No newline at end of file
+diff --git packages/thumbs_test.tex packages/thumbs_test.tex
+new file mode 100644
+index 0000000..9988cae
+--- /dev/null
++++ packages/thumbs_test.tex
+@@ -0,0 +1,9 @@
++\documentclass{article}
++\usepackage{thumbs}
++
++\begin{document}
++    \chapter{Chapter 1}
++    \addthumb{First}{\Roman{chapter}}{black}{gray}
++    \chapter{Chapter 2}
++    \addthumb{Second}{\Roman{chapter}}{black}{gray}
++\end{document}
+\ No newline at end of file
+diff --git packages/undolabl_test.tex packages/undolabl_test.tex
+new file mode 100644
+index 0000000..70d58ee
+--- /dev/null
++++ packages/undolabl_test.tex
+@@ -0,0 +1,6 @@
++\documentclass{article}
++\usepackage{undolabl}
++
++\begin{document}
++    IDK what this package does
++\end{document}
+\ No newline at end of file
