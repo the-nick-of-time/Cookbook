@@ -1,10 +1,14 @@
 #!/bin/bash
 
 exe="$0"
-title="$1"
-time="$2"
-yield="$3"
 here=$(dirname "$(readlink -f "$0")")
+
+echo Enter the name of the dish: >&2
+read title
+echo Enter how long it takes to make: >&2
+read time
+echo Enter how much it produces: >&2
+read yield
 
 usage() {
 	cat <<< "$exe TITLE TIME YIELD"

@@ -12,7 +12,7 @@ tested: Cookbook-Tested.pdf
 digital: Cookbook-Digital.pdf
 
 new:
-	"$(PWD)/interactive.sh"
+	"$(PWD)/new.sh"
 
 Cookbook.zip: $(OUTS)
 	zip $@ $^
@@ -37,17 +37,11 @@ clean:
 	git clean -Xf .
 
 view: view-Cookbook.pdf view-Cookbook-Tested.pdf view-Cookbook-Digital.pdf
-view-%:
-	# $* evaluates to nothing at the point it is evaluated in the dependency list
-	# so normal dependencies don't work
-	$(MAKE) $*
+view-%: %
 	xdg-open $*
 
 upload: upload-Cookbook.pdf upload-Cookbook-Tested.pdf upload-Cookbook-Digital.pdf
-upload-%:
-	# $* evaluates to nothing at the point it is evaluated in the dependency list
-	# so normal dependencies don't work
-	$(MAKE) $*
+upload-%: %
 	rsync --chown=server:server --chmod=444 $* doksta:/var/www/files/$*
 
 phone-sync: $(OUTS)
