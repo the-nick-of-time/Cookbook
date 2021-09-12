@@ -9,7 +9,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 
 local_repository(
     name = "bazel_latex",
-    path = "/home/nthurmes/code/bazel-latex",
+    path = "/home/nthurmes/code/bazel-latex-customized",
 )
 
 load("@bazel_latex//:repositories.bzl", "latex_repositories")
