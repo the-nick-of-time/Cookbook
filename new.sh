@@ -10,9 +10,6 @@ read time
 echo Enter how much it produces: >&2
 read yield
 
-usage() {
-	cat <<< "$exe TITLE TIME YIELD"
-}
 
 filename() {
 	echo "$here/entries/$(label).tex"
@@ -36,11 +33,6 @@ cat <<< "\\documentclass[../Cookbook.tex]{subfiles}
 "
 }
 
-
-if [ "$#" -ne 3 ] ; then
-	usage
-	exit 1
-fi
 
 file > "$(filename)"
 echo "Created entries/$(basename "$(filename)")" >&2

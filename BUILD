@@ -51,3 +51,8 @@ latex_document(
         ":packages",
     ]
 )
+
+sh_binary(
+    name = "new",
+    srcs = [":new.sh"],
+)
