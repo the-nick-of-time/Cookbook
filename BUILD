@@ -1,4 +1,5 @@
 load("@bazel_latex//:latex.bzl", "latex_document")
+load("//:cookbook.bzl", "cookbook")
 
 filegroup(
     name = "recipes",
@@ -37,34 +38,28 @@ genrule(
     cmd = "$(location :densities) >$@",
 )
 
-latex_document(
+py_binary(
+    name = "volumes",
+    srcs = ["volumes.py"],
+)
+
+genrule(
+    name = "volume-table",
+    tools = [":volumes"],
+    outs = ["volume-table.tex"],
+    cmd = "$(location :volumes) >$@",
+)
+
+cookbook(
     name = "Cookbook",
-    main = "Cookbook.tex",
-    srcs = [
-        ":recipes",
-        ":packages",
-        ":density-table",
-    ],
 )
 
-latex_document(
+cookbook(
     name = "Cookbook-Tested",
-    main = "Cookbook.tex",
-    srcs = [
-        ":recipes",
-        ":packages",
-        ":density-table",
-    ],
 )
 
-latex_document(
+cookbook(
     name = "Cookbook-Digital",
-    main = "Cookbook.tex",
-    srcs = [
-        ":recipes",
-        ":packages",
-        ":density-table",
-    ],
 )
 
 sh_binary(
