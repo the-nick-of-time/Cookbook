@@ -25,13 +25,26 @@ filegroup(
     ],
 )
 
+py_binary(
+    name = "densities",
+    srcs = ["densities.py"],
+)
+
+genrule(
+    name = "density-table",
+    tools = [":densities"],
+    outs = ["density-table.tex"],
+    cmd = "$(location :densities) >$@",
+)
+
 latex_document(
     name = "Cookbook",
     main = "Cookbook.tex",
     srcs = [
         ":recipes",
         ":packages",
-    ]
+        ":density-table",
+    ],
 )
 
 latex_document(
@@ -40,7 +53,8 @@ latex_document(
     srcs = [
         ":recipes",
         ":packages",
-    ]
+        ":density-table",
+    ],
 )
 
 latex_document(
@@ -49,7 +63,8 @@ latex_document(
     srcs = [
         ":recipes",
         ":packages",
-    ]
+        ":density-table",
+    ],
 )
 
 sh_binary(
