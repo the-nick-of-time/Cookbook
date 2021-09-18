@@ -7,6 +7,8 @@ volume = {
     "Fluid Ounce": 30,
     "Cup": 240,
     "mL": 1,
+    "L": 1000,
+    "Pint": 480,
 }
 def nicefrac(mL, othermL):
     ratio = Fraction(mL, othermL)
@@ -18,11 +20,13 @@ def main():
     print(r'''\begin{table}[h]
 	\centering
 	\label{tab:volume}
-	\caption{Volume}
-	\begin{tabular}{c||c|c|c|c|c}
-    \diagbox[dir=NW]{One}{Is this many}& \textbf{mL} & \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} \\ \hhline{=#=|=|=|=|=}''')
+	\caption{Volume}''')
+    print('\\begin{tabular}{c|' + '|c' * len(volume) + '}')
+    print(r'''\diagbox[dir=NW]{One}{Is this many}&''')
 
     order = sorted(volume.items(), key=lambda item: item[1])
+    print('&'.join([rf'\textbf{{{name}}}' for name, _ in order]))
+    print('\\\\ \\hhline{=#' + '|'.join(['=']*len(order)) + '}')
     for name, mL in order:
         row = [f'\\textbf{{{name}}}'] + [nicefrac(mL, othermL) for _, othermL in order]
         print('&'.join(row), end="\\\\\n")
