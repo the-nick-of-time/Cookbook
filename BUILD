@@ -1,4 +1,4 @@
-load("@bazel_latex//:latex.bzl", "latex_document")
+load("@rules_python//python:defs.bzl", "py_binary")
 load("//:cookbook.bzl", "cookbook")
 
 filegroup(
