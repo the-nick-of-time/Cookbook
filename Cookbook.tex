@@ -73,6 +73,10 @@
 \newcommand{\wwb}{whole wheat bread\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
 
+% Referencing a page will basically always be with "page X"
+\let\plainpageref\pageref
+\newcommand{\reciperef}[1]{page~\plainpageref{#1}}
+
 \DeclareDocumentCommand{\flour}{ m m g }{%
 \IfNoValueTF{#3}{#2}{\fr{{#2}}{{#3}}} % if two arguments, interpret as #2/#3
 cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
