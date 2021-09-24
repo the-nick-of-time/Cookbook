@@ -1,0 +1,40 @@
+#!/bin/bash
+# See https://github.com/adriancooney/Taskfile for examples
+
+# Sane error handling 
+set -e -o pipefail -x
+
+### FUNCTIONS GO HERE
+function default {
+	# Fill this to run a default task (with whatever arguments you want too)
+	help
+}
+
+function build {
+	bazel build //:all
+}
+
+function release {
+	build
+	./github-release-api/github_release_manager.sh \
+		-l the-nick-of-time -t $(cat ~/code/github_api_key) \
+		-o the-nick-of-time -r Cookbook \
+		-d $(git describe --tags --abbrev=0) \
+		-c create
+	./github-release-api/github_release_manager.sh \
+		-l the-nick-of-time -t $(cat ~/code/github_api_key) \
+		-o the-nick-of-time -r Cookbook \
+		-d $(git describe --tags --abbrev=0) \
+		-c upload bazel-bin/Cookbook-Tested.pdf bazel-bin/Cookbook-Digital.pdf bazel-bin/Cookbook.pdf
+}
+
+### /FUNCTIONS GO HERE
+
+# Auto-generate list of tasks
+function help {
+    echo "$0 <task> <args>"
+    echo "Tasks:"
+    compgen -A function | cat -n
+}
+
+"${@:-default}"
