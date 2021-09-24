@@ -93,7 +93,8 @@ teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argum
 yeast}
 
 \newcommand{\tempf}[1]{#1\0F (%
-\FPeval\celsiusvalue{round((#1 - 32) * ( 5. / 9 ), 0)}%
+% divide then multiply by 5 to round to nearest 5
+\FPeval\celsiusvalue{round(round((#1 - 32) * (5. / 9) / 5, 0) * 5, 0)}%
 \FPprint{\celsiusvalue}\0C)}
 
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
