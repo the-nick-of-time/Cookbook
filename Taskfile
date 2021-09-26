@@ -14,6 +14,21 @@ function build {
 	bazel build //:all
 }
 
+function view {
+	case "$1" in
+		""|"d"|"digital"|"Digital")
+			job="Cookbook-Digital" 
+			;;
+		"c"|"cookbook")
+			job="Cookbook"
+			;;
+		"t"|"tested"|"Tested")
+			job="Cookbook-Tested"
+			;;
+	esac
+	bazel run "//:${job}_view"
+}
+
 function release {
 	build
 	./github-release-api/github_release_manager.sh \
