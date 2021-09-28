@@ -13,7 +13,7 @@ volume = {
 def nicefrac(mL, othermL):
     ratio = Fraction(mL, othermL)
     if ratio.denominator != 1:
-        return f'\\nicefrac{{{ratio.numerator}}}{{{ratio.denominator}}}'
+        return '\\nicefrac{{{ratio.numerator}}}{{{ratio.denominator}}}'.format(ratio=ratio)
     return str(ratio.numerator)
 
 def main():
@@ -25,10 +25,10 @@ def main():
     print(r'''\diagbox[dir=NW]{One}{Is this many}&''')
 
     order = sorted(volume.items(), key=lambda item: item[1])
-    print('&'.join([rf'\textbf{{{name}}}' for name, _ in order]))
+    print('&'.join([r'\textbf{{{name}}}'.format(name=name) for name, _ in order]))
     print('\\\\ \\hhline{=#' + '|'.join(['=']*len(order)) + '}')
     for name, mL in order:
-        row = [f'\\textbf{{{name}}}'] + [nicefrac(mL, othermL) for _, othermL in order]
+        row = ['\\textbf{{{name}}}'.format(name=name)] + [nicefrac(mL, othermL) for _, othermL in order]
         print('&'.join(row), end="\\\\\n")
 
     print(r'''\end{tabular}

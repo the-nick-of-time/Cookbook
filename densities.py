@@ -19,7 +19,7 @@ def main():
 	\begin{tabular}{c|c|c}
     Ingredient      & \fr{g}{cup} & \fr{g}{tablespoon} \\ \hline''')
     for ingredient, density in densities.items():
-        print(f'{ingredient} & {density} & {density/16:.1f} \\\\')
+        print('{ingredient} & {density} & {dtb:.1f} \\\\'.format(ingredient=ingredient, density=density, dtb=density/16))
     print(r'''\end{tabular}
     \end{table}''')
 
