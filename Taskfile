@@ -6,15 +6,17 @@ set -e -o pipefail -x
 
 ### FUNCTIONS GO HERE
 function default {
-	# Fill this to run a default task (with whatever arguments you want too)
+	: "Default task is help"
 	help
 }
 
 function build {
+	: "Build all versions"
 	bazel build //:all
 }
 
 function view {
+	: "view [[d]igital|[c]ookbook|[t]ested]"
 	case "$1" in
 		""|"d"|"digital"|"Digital")
 			job="Cookbook-Digital" 
@@ -30,6 +32,7 @@ function view {
 }
 
 function release {
+	: "Create a github release from the current commit, as long as it's tagged"
 	build
 	./github-release-api/github_release_manager.sh \
 		-l the-nick-of-time -t $(cat ~/code/github_api_key) \
@@ -45,11 +48,14 @@ function release {
 
 ### /FUNCTIONS GO HERE
 
-# Auto-generate list of tasks
 function help {
+    : "Auto-generate a list of tasks"
+    set +x
     echo "$0 <task> <args>"
     echo "Tasks:"
-    compgen -A function | cat -n
+    compgen -A function | while read name ; do
+		paste <(printf '%s' "$name") <(type "$name" | sed -n '4p')
+    done
 }
 
 "${@:-default}"
