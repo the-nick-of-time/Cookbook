@@ -16,7 +16,7 @@ filename() {
 }
 
 label() {
-	python -c 'from sys import argv;from re import sub;print(sub(r"[^\w]", "", argv[1].title()),end="")' "$title"
+	perl -ne "s/\W//g; print;" <<<"$title"
 }
 
 

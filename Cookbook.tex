@@ -73,6 +73,10 @@
 \newcommand{\wwb}{whole wheat bread\xspace}
 \newcommand{\tooth}[1]{until it passes the toothpick test, about #1 minutes.}
 
+% Referencing a page will basically always be with "page X"
+\let\plainpageref\pageref
+\newcommand{\reciperef}[1]{page~\plainpageref{#1}}
+
 \DeclareDocumentCommand{\flour}{ m m g }{%
 \IfNoValueTF{#3}{#2}{\fr{{#2}}{{#3}}} % if two arguments, interpret as #2/#3
 cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
@@ -89,7 +93,8 @@ teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argum
 yeast}
 
 \newcommand{\tempf}[1]{#1\0F (%
-\FPeval\celsiusvalue{round((#1 - 32) * ( 5. / 9 ), 0)}%
+% divide then multiply by 5 to round to nearest 5
+\FPeval\celsiusvalue{round(round((#1 - 32) * (5. / 9) / 5, 0) * 5, 0)}%
 \FPprint{\celsiusvalue}\0C)}
 
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
@@ -287,6 +292,8 @@ yeast}
 
 \dish{BasilPesto}
 
+\dish{BoiledEggs}
+
 \dish{Dumplings}
 
 \untested{\dish{LimeGingerVinaigrette}}
@@ -298,8 +305,6 @@ yeast}
 \dish{Quinoa}
 
 \dish{Rice}
-
-\dish{SoftBoiledEggs}
 
 \dish{SpaghettiSauce}
 
@@ -469,6 +474,8 @@ yeast}
 
 \untested{\dish{FreshBlueberryTart}}
 
+\dish{PeachPie}
+
 \dish{PumpkinPie}
 
 \dish{DeepDishRhubarbPie}
@@ -530,19 +537,7 @@ yeast}
 
 \section{Measurement Conversions}
 
-\begin{table}[h]
-	\centering
-	\label{tab:volume}
-	\caption{Volume}
-	\begin{tabular}{c||c|c|c|c|c}
-		\diagbox[dir=NW]{One}{Is this many}& \textbf{Teaspoon} & \textbf{Tablespoon} & \textbf{Fluid Ounce} & \textbf{Cup} & \textbf{mL} \\ \hhline{=#=|=|=|=|=}
-		\textbf{Teaspoon}               &         1         &        \fr13        &      \fr{1}{12}      &  \fr{1}{48}  &     5       \\ \hline
-		\textbf{Tablespoon}             &         3         &          1          &        \fr12         &  \fr{1}{16}  &    15       \\ \hline
-		\textbf{Fluid Ounce}            &        12         &          2          &          1           &    \fr18     &    30       \\ \hline
-		\textbf{Cup}                    &        48         &         16          &          8           &      1       &    240      \\ \hline
-		\textbf{mL}                     &       \fr15       &     \fr{1}{15}      &      \fr{1}{30}      & \fr{1}{240}  &     1
-	\end{tabular}
-\end{table}
+\input{volume-table.tex}
 
 
 1 pint = 2 cups
@@ -599,24 +594,7 @@ yeast}
 	\end{tabular}
 \end{table}
 
-
-\begin{table}[ht]
-	\centering
-	\label{tab:density}
-	\caption{Densities of common ingredients}
-	\begin{tabular}{c|c|c}
-		     Ingredient      & \fr{g}{cup} & \fr{g}{tablespoon} \\ \hline
-		  Granulated sugar   &     190     &         12         \\
-		Brown sugar (packed) &     200     &        12.5        \\
-		       Butter        &     230     &         14         \\
-		       Water         &     240     &         15         \\
-		       Flour         &     150     &        9.5         \\
-		        Milk         &     250     &         16         \\
-		    Heavy cream      &     230     &        14.5        \\
-		       Honey         &     340     &         21         \\
-		      Cornmeal       &     140     &        8.75
-	\end{tabular}
-\end{table}
+\input{density-table.tex}
 
 
 \end{document}
