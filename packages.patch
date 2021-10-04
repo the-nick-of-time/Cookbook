@@ -1,36 +1,5 @@
-diff --git BUILD.bazel BUILD.bazel
-index 6761e4b..9d45706 100644
---- BUILD.bazel
-+++ BUILD.bazel
-@@ -34,6 +34,14 @@ latex_toolchain(
-     platform = "x86_64-linux",
- )
- 
-+latex_toolchain(
-+    exec_compatible_with = [
-+        "@bazel_tools//platforms:linux",
-+        "@bazel_tools//platforms:armhf",
-+    ],
-+    platform = "armhf-linux",
-+)
-+
- filegroup(
-     name = "core_dependencies",
-     srcs = [
-diff --git WORKSPACE WORKSPACE
-index 9506762..5acbe1a 100644
---- WORKSPACE
-+++ WORKSPACE
-@@ -16,6 +16,7 @@ register_toolchains(
-     "//:latex_toolchain_amd64-freebsd",
-     "//:latex_toolchain_x86_64-darwin",
-     "//:latex_toolchain_x86_64-linux",
-+    "//:latex_toolchain_armhf-linux",
- )
- 
- load("@bazel_latex//:repositories.bzl", "latex_repositories")
 diff --git packages/BUILD.bazel packages/BUILD.bazel
-index 595230b..3edf25f 100644
+index 4b4dc7e..3edf25f 100644
 --- packages/BUILD.bazel
 +++ packages/BUILD.bazel
 @@ -165,6 +165,12 @@ latex_package(
@@ -91,24 +60,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "hyperref",
      srcs = [
-@@ -549,6 +579,16 @@ latex_package(
-     tests = ["lastpage_test.tex"],
- )
- 
-+latex_package(
-+    name = "lettrine",
-+    srcs = [
-+        ":keyval",
-+        ":minifp",
-+        "@texlive_texmf__texmf-dist__tex__latex__lettrine",
-+    ],
-+    tests = ["lettrine_test.tex"],
-+)
-+
- latex_package(
-     name = "lineno",
-     srcs = ["@texlive_texmf__texmf-dist__tex__latex__lineno"],
-@@ -564,6 +604,19 @@ latex_package(
+@@ -574,6 +604,19 @@ latex_package(
      tests = ["l3keys2e_test.tex"],
  )
  
@@ -128,7 +80,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "listings",
      srcs = [
-@@ -573,6 +626,14 @@ latex_package(
+@@ -583,6 +626,14 @@ latex_package(
      tests = ["listings_test.tex"],
  )
  
@@ -143,40 +95,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "longtable",
      srcs = [":tools"],
-@@ -635,6 +696,17 @@ latex_package(
-     tests = ["mfirstuc_test.tex"],
- )
- 
-+latex_package(
-+    name = "mflogo",
-+    srcs = [
-+        "@texlive_texmf__texmf-dist__fonts__afm__hoekwater__mflogo-font",
-+        "@texlive_texmf__texmf-dist__fonts__tfm__public__mflogo",
-+        "@texlive_texmf__texmf-dist__fonts__type1__hoekwater__mflogo-font",
-+        "@texlive_texmf__texmf-dist__tex__latex__mflogo",
-+    ],
-+    tests = ["mflogo_test.tex"],
-+)
-+
- latex_package(
-     name = "microtype",
-     srcs = [
-@@ -644,6 +716,14 @@ latex_package(
-     tests = ["microtype_test.tex"],
- )
- 
-+latex_package(
-+    name = "minifp",
-+    srcs = [
-+        "@texlive_texmf__texmf-dist__tex__generic__minifp",
-+    ],
-+    tests = ["minifp_test.tex"],
-+)
-+
- latex_package(
-     name = "mnsymbol",
-     srcs = [
-@@ -684,12 +764,33 @@ latex_package(
+@@ -713,12 +764,33 @@ latex_package(
      tests = ["multicol_test.tex"],
  )
  
@@ -210,7 +129,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "parskip",
      srcs = [
-@@ -741,6 +842,12 @@ latex_package(
+@@ -770,6 +842,12 @@ latex_package(
      tests = ["placeins_test.tex"],
  )
  
@@ -223,7 +142,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "silence",
      srcs = ["@texlive_texmf__texmf-dist__tex__latex__silence"],
-@@ -804,6 +911,12 @@ latex_package(
+@@ -833,6 +911,12 @@ latex_package(
      tests = ["subcaption_test.tex"],
  )
  
@@ -236,7 +155,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "substr",
      srcs = ["@texlive_texmf__texmf-dist__tex__latex__substr"],
-@@ -816,12 +929,30 @@ latex_package(
+@@ -845,6 +929,15 @@ latex_package(
      tests = ["svn-prov_test.tex"],
  )
  
@@ -252,22 +171,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "tabularx",
      srcs = [":tools"],
-     tests = ["tabularx_test.tex"],
- )
- 
-+latex_package(
-+    name = "tabulary",
-+    srcs = [
-+        ":array",
-+        "@texlive_texmf__texmf-dist__tex__latex__tabulary",
-+    ],
-+    tests = ["tabulary_test.tex"],
-+)
-+
- latex_package(
-     name = "tcolorbox",
-     srcs = [
-@@ -834,12 +965,30 @@ latex_package(
+@@ -872,12 +965,30 @@ latex_package(
      tests = ["tcolorbox_test.tex"],
  )
  
@@ -298,7 +202,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "tgheros",
      srcs = [
-@@ -850,6 +999,18 @@ latex_package(
+@@ -888,6 +999,18 @@ latex_package(
      tests = ["tgheros_test.tex"],
  )
  
@@ -317,7 +221,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "tikz",
      srcs = [":pgf"],
-@@ -912,6 +1073,12 @@ latex_package(
+@@ -950,6 +1073,12 @@ latex_package(
      tests = ["ulem_test.tex"],
  )
  
@@ -330,29 +234,7 @@ index 595230b..3edf25f 100644
  latex_package(
      name = "unicode-math",
      srcs = [
-@@ -921,11 +1088,20 @@ latex_package(
-         "@texlive_texmf__texmf-dist__tex__latex__filehook",
-         "@texlive_texmf__texmf-dist__tex__latex__l3packages__l3keys2e",
-         "@texlive_texmf__texmf-dist__tex__latex__unicode-math",
--        "@texlive_texmf__texmf-dist__tex__lualatex__lualatex-math"
-+        "@texlive_texmf__texmf-dist__tex__lualatex__lualatex-math",
-     ],
-     tests = ["unicode-math_test.tex"],
- )
- 
-+latex_package(
-+    name = "units",
-+    srcs = [
-+        ":ifthen",
-+        "@texlive_texmf__texmf-dist__tex__latex__units",
-+    ],
-+    tests = ["units_test.tex"],
-+)
-+
- latex_package(
-     name = "upquote",
-     srcs = ["@texlive_texmf__texmf-dist__tex__latex__upquote"],
-@@ -944,6 +1120,12 @@ latex_package(
+@@ -991,6 +1120,12 @@ latex_package(
      tests = ["verbatim_test.tex"],
  )
  
@@ -411,20 +293,6 @@ index 0000000..97de453
 +    \end{tabular}
 +\end{document}
 \ No newline at end of file
-diff --git packages/lettrine_test.tex packages/lettrine_test.tex
-new file mode 100644
-index 0000000..b74cf1c
---- /dev/null
-+++ packages/lettrine_test.tex
-@@ -0,0 +1,8 @@
-+\documentclass{report}
-+\usepackage{lettrine}
-+\begin{document}
-+    \lettrine[lraise=0.1, nindent=0em, slope=-.5em]{T}{his} is an example.
-+    With a long enough text, the first letter should be dropped on the second
-+    line as well.
-+    The third line, on the other hand, should not be impacted at all.
-+\end{document}
 diff --git packages/libertine_test.tex packages/libertine_test.tex
 new file mode 100644
 index 0000000..e742c03
@@ -435,30 +303,6 @@ index 0000000..e742c03
 +\usepackage{libertine}
 +\begin{document}
 +This text should be in the libertine font.
-+\end{document}
-diff --git packages/mflogo_test.tex packages/mflogo_test.tex
-new file mode 100644
-index 0000000..7388659
---- /dev/null
-+++ packages/mflogo_test.tex
-@@ -0,0 +1,6 @@
-+\documentclass{report}
-+\usepackage{mflogo}
-+\begin{document}
-+    This is a piece of text that uses mflogo.
-+    \MP
-+\end{document}
-diff --git packages/minifp_test.tex packages/minifp_test.tex
-new file mode 100644
-index 0000000..b48105c
---- /dev/null
-+++ packages/minifp_test.tex
-@@ -0,0 +1,6 @@
-+\documentclass{report}
-+\usepackage{minifp}
-+\begin{document}
-+    \MFPadd{1.2}{3.4}\X
-+    \X
 +\end{document}
 diff --git packages/nicefrac_test.tex packages/nicefrac_test.tex
 new file mode 100644
@@ -500,14 +344,14 @@ index 0000000..fcc45fa
 \ No newline at end of file
 diff --git packages/pict2e_test.tex packages/pict2e_test.tex
 new file mode 100644
-index 0000000..c1a3298
+index 0000000..cfc4edf
 --- /dev/null
 +++ packages/pict2e_test.tex
 @@ -0,0 +1,5 @@
 +\documentclass{article}
 +\usepackage{pict2e}
 +\begin{document}
-+
++    
 +\end{document}
 \ No newline at end of file
 diff --git packages/subfiles_child_test.tex packages/subfiles_child_test.tex
@@ -535,19 +379,6 @@ index 0000000..194d359
 +    \subfile{subfiles_child_test.tex}
 +\end{document}
 \ No newline at end of file
-diff --git packages/tabulary_test.tex packages/tabulary_test.tex
-new file mode 100644
-index 0000000..e64b1c6
---- /dev/null
-+++ packages/tabulary_test.tex
-@@ -0,0 +1,7 @@
-+\documentclass{report}
-+\usepackage{tabulary}
-+\begin{document}
-+    \begin{tabulary}{1.0\textwidth}{|p{.3\textwidth}|p{.7\textwidth}|}
-+        a & b\\
-+    \end{tabulary}
-+\end{document}
 diff --git packages/tengwarscript_test.tex packages/tengwarscript_test.tex
 new file mode 100644
 index 0000000..8fe7924
@@ -592,14 +423,3 @@ index 0000000..70d58ee
 +    IDK what this package does
 +\end{document}
 \ No newline at end of file
-diff --git packages/units_test.tex packages/units_test.tex
-new file mode 100644
-index 0000000..43f8a9d
---- /dev/null
-+++ packages/units_test.tex
-@@ -0,0 +1,5 @@
-+\documentclass{report}
-+\usepackage{units}
-+\begin{document}
-+    \unitfrac[1]{2}{3}{m}
-+\end{document}
