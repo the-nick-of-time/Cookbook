@@ -1,7 +1,4 @@
-"""Summarize a build of the cookbook, having all prerequisites.
-
-The jobname has to change across the three versions but nothing else.
-"""
+"""Summarize the build inputs to the cookbook so only the jobname needs to be specified."""
 
 load("@bazel_latex//:latex.bzl", "latex_document")
 
