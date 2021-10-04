@@ -50,7 +50,6 @@ function release {
 
 function help {
     : "Auto-generate a list of tasks"
-    set +x
     echo "$0 <task> <args>"
     echo "Tasks:"
     compgen -A function | while read name ; do
