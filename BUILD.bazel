@@ -9,20 +9,20 @@ filegroup(
 filegroup(
     name = "packages",
     srcs = [
-        "@bazel_latex//packages:fontspec",
-        "@bazel_latex//packages:hyperref",
-        "@bazel_latex//packages:geometry",
         "@bazel_latex//packages:cuisine",
-        "@bazel_latex//packages:fancyhdr",
-        "@bazel_latex//packages:subfiles",
-        "@bazel_latex//packages:tabularx",
-        "@bazel_latex//packages:etoolbox",
-        "@bazel_latex//packages:thumbs",
         "@bazel_latex//packages:diagbox",
+        "@bazel_latex//packages:etoolbox",
+        "@bazel_latex//packages:fancyhdr",
+        "@bazel_latex//packages:fontspec",
+        "@bazel_latex//packages:geometry",
         "@bazel_latex//packages:hhline",
+        "@bazel_latex//packages:hyperref",
         "@bazel_latex//packages:nicefrac",
         "@bazel_latex//packages:siunitx",
+        "@bazel_latex//packages:subfiles",
         "@bazel_latex//packages:substr",
+        "@bazel_latex//packages:tabularx",
+        "@bazel_latex//packages:thumbs",
     ],
 )
 
@@ -33,9 +33,9 @@ py_binary(
 
 genrule(
     name = "density-table",
-    tools = [":densities"],
     outs = ["density-table.tex"],
     cmd = "$(location :densities) >$@",
+    tools = [":densities"],
 )
 
 py_binary(
@@ -45,9 +45,9 @@ py_binary(
 
 genrule(
     name = "volume-table",
-    tools = [":volumes"],
     outs = ["volume-table.tex"],
     cmd = "$(location :volumes) >$@",
+    tools = [":volumes"],
 )
 
 cookbook(

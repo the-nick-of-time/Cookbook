@@ -1,3 +1,5 @@
+"""Summarize the build inputs to the cookbook so only the jobname needs to be specified."""
+
 load("@bazel_latex//:latex.bzl", "latex_document")
 
 def cookbook(name):
@@ -9,5 +11,5 @@ def cookbook(name):
             ":packages",
             ":density-table",
             ":volume-table",
-        ]
+        ],
     )
