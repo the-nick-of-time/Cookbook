@@ -1,10 +1,5 @@
 load("@rules_python//python:defs.bzl", "py_binary")
-load("//:cookbook.bzl", "cookbook", "individual")
-
-filegroup(
-    name = "recipes",
-    srcs = glob(["entries/*.tex"]),
-)
+load("//:cookbook.bzl", "cookbook")
 
 filegroup(
     name = "packages",
@@ -24,6 +19,7 @@ filegroup(
         "@bazel_latex//packages:siunitx",
         "@bazel_latex//packages:substr",
     ],
+    visibility = ["//visibility:public"]
 )
 
 py_binary(
@@ -67,4 +63,8 @@ sh_binary(
     srcs = [":new.sh"],
 )
 
-[individual(file=file) for file in glob(["entries/*.tex"])]
+exports_files(
+    srcs = [
+        "Cookbook.tex"
+    ]
+)

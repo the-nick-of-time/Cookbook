@@ -5,21 +5,9 @@ def cookbook(name):
         name = name,
         main = "Cookbook.tex",
         srcs = [
-            ":recipes",
+            "//entries:recipes",
             ":packages",
             ":density-table",
             ":volume-table",
-        ]
-    )
-
-
-def individual(file):
-    name = file.rsplit('.', 1)[0].split('/', 1)[1]
-    latex_document(
-        name = name,
-        main = file,
-        srcs = [
-            ":packages",
-            "Cookbook.tex",
         ]
     )
