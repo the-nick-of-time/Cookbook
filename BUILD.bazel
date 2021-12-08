@@ -1,5 +1,5 @@
 load("@rules_python//python:defs.bzl", "py_binary")
-load("//:cookbook.bzl", "cookbook")
+load("//:cookbook.bzl", "cookbook", "individual")
 
 filegroup(
     name = "recipes",
@@ -66,3 +66,5 @@ sh_binary(
     name = "new",
     srcs = [":new.sh"],
 )
+
+[individual(file=file) for file in glob(["entries/*.tex"])]

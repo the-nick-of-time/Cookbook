@@ -11,3 +11,15 @@ def cookbook(name):
             ":volume-table",
         ]
     )
+
+
+def individual(file):
+    name = file.rsplit('.', 1)[0].split('/', 1)[1]
+    latex_document(
+        name = name,
+        main = file,
+        srcs = [
+            ":packages",
+            "Cookbook.tex",
+        ]
+    )
