@@ -1,0 +1,1 @@
+build --jobs=HOST_CPUS*.5
