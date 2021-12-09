@@ -14,5 +14,5 @@ def cookbook(name):
             ":packages",
             ":density-table",
             ":volume-table",
-        ]
+        ],
     )
