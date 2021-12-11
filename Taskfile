@@ -2,7 +2,7 @@
 # See https://github.com/adriancooney/Taskfile for examples
 
 # Sane error handling 
-set -e -o pipefail -x
+set -e -o pipefail
 
 ### FUNCTIONS GO HERE
 function default {
