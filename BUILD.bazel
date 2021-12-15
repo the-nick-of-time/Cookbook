@@ -4,6 +4,7 @@ load("//:cookbook.bzl", "cookbook")
 filegroup(
     name = "packages",
     srcs = [
+        "@bazel_latex//packages:booktabs",
         "@bazel_latex//packages:cuisine",
         "@bazel_latex//packages:diagbox",
         "@bazel_latex//packages:etoolbox",

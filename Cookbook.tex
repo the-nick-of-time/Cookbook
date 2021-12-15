@@ -54,6 +54,7 @@
 \usepackage{siunitx}
 \usepackage{fp}
 \usepackage{xparse}
+\usepackage{booktabs}
 
 
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
@@ -386,9 +387,11 @@ yeast}
 \chapter{Snacks}
 \thumbmark{Snacks}
 
-\section{Smoothies}
+\section{Drinks}
 
 \untested{\dish{GreenTeaSmoothie}}
+
+\dish{HotCocoaMix}
 
 \dish{MixedBerrySmoothie}
 
@@ -574,7 +577,7 @@ yeast}
 
 1 gallon = 4 quarts = 8 pints = 16 cups = 128 fluid ounces
 
-1 liter = 34 fluid ounces $\approx$ 1 quart
+1 liter = 34 fluid ounces \(\approx\) 1 quart
 
 1 packet yeast = \fr52 teaspoons = 9 grams
 
@@ -584,14 +587,14 @@ yeast}
 	\centering
 	\label{tab:temp}
 	\caption{Temperature}
-	\begin{tabular}{c|c}
-		\si{\degree}F & \si{\degree}C \\ \hline
-		250           & 130           \\ \hline
-		300           & 150           \\ \hline
-		325           & 170           \\ \hline
-		350           & 180           \\ \hline
-		375           & 190           \\ \hline
-		400           & 200           \\ \hline
+	\begin{tabular}{cc}
+		\si{\degree}F & \si{\degree}C \\ \midrule
+		250           & 130           \\
+		300           & 150           \\
+		325           & 170           \\
+		350           & 180           \\
+		375           & 190           \\
+		400           & 200           \\
 		425           & 220
 	\end{tabular}
 \end{table}
@@ -601,23 +604,23 @@ yeast}
 	\centering
 	\label{tab:mass}
 	\caption{Mass and Weight}
-	\begin{tabular}{c|c}
-		g    & oz             \\ \hline
-		10   & \fr14          \\ \hline
-		15   & \fr12          \\ \hline
-		25   & 1              \\ \hline
-		50   & \fr74          \\ \hline
-		75   & \fr{11}{4}     \\ \hline
-		100  & \fr72          \\ \hline
-		150  & \fr{11}{2}     \\ \hline
-		200  & 7              \\ \hline
-		250  & 9              \\ \hline
-		300  & \fr{21}{2}     \\ \hline
-		350  & 12             \\ \hline
-		400  & 14             \\ \hline
-		450  & 16 (1 lb)      \\ \hline
-		500  & 18             \\ \hline
-		700  & 24             \\ \hline
+	\begin{tabular}{cc}
+		g    & oz             \\ \midrule
+		10   & \fr14          \\
+		15   & \fr12          \\
+		25   & 1              \\
+		50   & \fr74          \\
+		75   & \fr{11}{4}     \\
+		100  & \fr72          \\
+		150  & \fr{11}{2}     \\
+		200  & 7              \\
+		250  & 9              \\
+		300  & \fr{21}{2}     \\
+		350  & 12             \\
+		400  & 14             \\
+		450  & 16 (1 lb)      \\
+		500  & 18             \\
+		700  & 24             \\
 		1000 & 36 (2 lb 4 oz)
 	\end{tabular}
 \end{table}

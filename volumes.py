@@ -21,12 +21,12 @@ def main():
 	\centering
 	\label{tab:volume}
 	\caption{Volume}''')
-    print('\\begin{tabular}{c|' + '|c' * len(volume) + '}')
+    print('\\begin{tabular}{' + 'c' * (len(volume) + 1) + '}')
     print(r'''\diagbox[dir=NW]{One}{Is this many}&''')
 
     order = sorted(volume.items(), key=lambda item: item[1])
     print('&'.join([rf'\textbf{{{name}}}' for name, _ in order]))
-    print('\\\\ \\hhline{=#' + '|'.join(['=']*len(order)) + '}')
+    print('\\\\ \midrule')
     for name, mL in order:
         row = [f'\\textbf{{{name}}}'] + [nicefrac(mL, othermL) for _, othermL in order]
         print('&'.join(row), end="\\\\\n")

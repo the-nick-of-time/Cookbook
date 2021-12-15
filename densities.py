@@ -16,8 +16,8 @@ def main():
 	\centering
 	\label{tab:density}
 	\caption{Densities of common ingredients}
-	\begin{tabular}{c|c|c}
-    Ingredient      & \fr{g}{cup} & \fr{g}{tablespoon} \\ \hline''')
+	\begin{tabular}{ccc}
+    Ingredient      & \fr{g}{cup} & \fr{g}{tablespoon} \\ \midrule''')
     for ingredient, density in densities.items():
         print(f'{ingredient} & {density} & {density/16:.1f} \\\\')
     print(r'''\end{tabular}
