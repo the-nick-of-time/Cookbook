@@ -1,3 +1,0 @@
-[submodule "github-release-api"]
-	path = github-release-api
-	url = git@github.com:pgdurand/github-release-api.git

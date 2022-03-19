@@ -1,7 +1,7 @@
 #!/bin/bash
 # See https://github.com/adriancooney/Taskfile for examples
 
-# Sane error handling 
+# Sane error handling
 set -e -o pipefail -x
 
 ### FUNCTIONS GO HERE
@@ -19,7 +19,7 @@ function view {
 	: "view [[d]igital|[c]ookbook|[t]ested]"
 	case "$1" in
 		""|"d"|"digital"|"Digital")
-			job="Cookbook-Digital" 
+			job="Cookbook-Digital"
 			;;
 		"c"|"cookbook")
 			job="Cookbook"
@@ -34,12 +34,12 @@ function view {
 function release {
 	: "Create a github release from the current commit, as long as it's tagged"
 	build
-	./github-release-api/github_release_manager.sh \
+	bazel run @github_release_api//:release \
 		-l the-nick-of-time -t $(cat ~/code/github_api_key) \
 		-o the-nick-of-time -r Cookbook \
 		-d $(git describe --tags --abbrev=0) \
 		-c create
-	./github-release-api/github_release_manager.sh \
+	bazel run @github_release_api//:release \
 		-l the-nick-of-time -t $(cat ~/code/github_api_key) \
 		-o the-nick-of-time -r Cookbook \
 		-d $(git describe --tags --abbrev=0) \
