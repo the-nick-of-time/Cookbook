@@ -1,0 +1,56 @@
+diff --git github_release_manager.sh github_release_manager.sh
+index 28609ca..fae07b4 100755
+--- github_release_manager.sh
++++ github_release_manager.sh
+@@ -33,7 +33,7 @@
+ 
+ # ========================================================================================
+ # Section: include API
+-script_dir=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P )
++script_dir=$( cd -P -- "$(dirname -- "$(readlink -- "$0")")" && pwd -P )
+ . $script_dir/github_release_api.sh
+ 
+ # ========================================================================================
+@@ -111,7 +111,7 @@ checkFileList "$COMMAND" "$FILES"
+ 
+ #execute command
+ case "$COMMAND" in
+-  info) 
++  info)
+     checkTag
+     release_id=$(getGithubReleaseId $TAG)
+     infoMsg "Git tag $TAG refers to github release ID: $release_id"
+@@ -125,7 +125,7 @@ case "$COMMAND" in
+     checkTag
+     createRelease $TAG "true" "$CREATE_MESSAGE"
+     ;;
+-  upload) 
++  upload)
+     checkTag
+     release_id=$(getGithubReleaseId $TAG)
+     infoMsg "Git tag $TAG refers to github release ID: $release_id"
+@@ -134,7 +134,7 @@ case "$COMMAND" in
+         uploadAsset $release_id "$fname"
+       done
+     ;;
+-  delete) 
++  delete)
+     checkTag
+     release_id=$(getGithubReleaseId $TAG)
+     infoMsg "Git tag $TAG refers to github release ID: $release_id"
+@@ -146,13 +146,13 @@ case "$COMMAND" in
+   rlist)
+     listReleaseSummary
+     ;;
+-  flist) 
++  flist)
+     checkTag
+     release_id=$(getGithubReleaseId $TAG)
+     infoMsg "Git tag $TAG refers to github release ID: $release_id"
+     listAssetSummary $release_id
+     ;;
+-  erase) 
++  erase)
+     checkTag
+     release_id=$(getGithubReleaseId $TAG)
+     infoMsg "Git tag $TAG refers to github release ID: $release_id"

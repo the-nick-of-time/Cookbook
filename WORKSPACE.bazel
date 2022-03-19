@@ -23,3 +23,13 @@ http_archive(
     sha256 = "954aa89b491be4a083304a2cb838019c8b8c3720a7abb9c4cb81ac7a24230cea",
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.4.0/rules_python-0.4.0.tar.gz",
 )
+
+http_archive(
+    name = "github_release_api",
+    build_file = "//:github-release-api.BUILD.bazel",
+    strip_prefix = "pgdurand-github-release-api-cd1c516",
+    type = "tgz",
+    sha256 = "e7095423f7879c7edf657158fd64094c8c1f20d81920d26a3aaa81880bb2ceae",
+    url = "https://api.github.com/repos/pgdurand/github-release-api/tarball/cd1c51669be47a35c2446d1f774246df4e2e0549",
+    patches= ["//:github_release_api.patch"]
+)

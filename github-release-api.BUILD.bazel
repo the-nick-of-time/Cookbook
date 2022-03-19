@@ -1,0 +1,33 @@
+# sh_binary(
+#     name = "json-v2.sh",
+#     srcs = ["json-v2.sh"],
+# )
+
+# sh_binary(
+#     name = "git_tag_manager.sh",
+#     srcs = ["git_tag_manager.sh"],
+# )
+
+# sh_binary(
+#     name = "github_release_api.sh",
+#     srcs = ["github_release_api.sh"],
+# )
+
+sh_library(
+    name = "dependencies",
+    srcs = [
+        ":github_release_api.sh",
+        ":git_tag_manager.sh",
+        ":json-v2.sh",
+    ]
+)
+
+sh_binary(
+    name = "release",
+    srcs = ["github_release_manager.sh"],
+    data = [
+        "github_release_api.sh",
+        "git_tag_manager.sh",
+        "json-v2.sh",
+    ],
+)
