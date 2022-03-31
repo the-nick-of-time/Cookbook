@@ -21,16 +21,17 @@ label() {
 
 
 file() {
-cat <<< "\\documentclass[../Cookbook.tex]{subfiles}
+	cat <<-EOF
+	\\documentclass[../Cookbook.tex]{subfiles}
 
-\\begin{document}
+	\\begin{document}
 
-\\begin{recipe}[$(label)]{$title}{$yield}{$time}
+	\\begin{recipe}[$(label)]{$title}{$yield}{$time}
 
-\\end{recipe}
+	\\end{recipe}
 
-\\end{document}
-"
+	\\end{document}
+	EOF
 }
 
 

@@ -46,6 +46,11 @@ function release {
 		-c upload bazel-bin/Cookbook-Tested.pdf bazel-bin/Cookbook-Digital.pdf bazel-bin/Cookbook.pdf
 }
 
+function new {
+	: "Create a new recipe file interactively"
+	./new.sh
+}
+
 ### /FUNCTIONS GO HERE
 
 function help {
