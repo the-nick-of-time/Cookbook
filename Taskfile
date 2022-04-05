@@ -2,7 +2,7 @@
 # See https://github.com/adriancooney/Taskfile for examples
 
 # Sane error handling
-set -e -o pipefail -x
+set -e -o pipefail
 
 ### FUNCTIONS GO HERE
 function default {
@@ -29,6 +29,14 @@ function view {
 			;;
 	esac
 	bazel run "//:${job}_view"
+}
+
+function deploy {
+	: "Copy outputs to pi fileserver"
+	build
+	for name in Cookbook Cookbook-Digital Cookbook-Tested ; do
+		scp "bazel-bin/${name}.pdf" "server@nthurmes.duckdns.org:/var/www/files/"
+	done
 }
 
 function release {
