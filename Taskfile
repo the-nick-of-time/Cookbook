@@ -35,7 +35,7 @@ function deploy {
 	: "Copy outputs to pi fileserver"
 	build
 	for name in Cookbook Cookbook-Digital Cookbook-Tested ; do
-		scp -i <(echo SERVER_ID) "bazel-bin/${name}.pdf" "server@nthurmes.duckdns.org:/var/www/files/"
+		scp "bazel-bin/${name}.pdf" "server@nthurmes.duckdns.org:/var/www/files/"
 	done
 }
 
