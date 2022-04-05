@@ -9,6 +9,7 @@ densities = {
     "Heavy cream": 230,
     "Honey": 340,
     "Cornmeal": 140,
+    "Buttermilk powder": 160,
 }
 
 def main():
