@@ -59,6 +59,14 @@ function new {
 	./new.sh
 }
 
+function phone-sync {
+	: "Share cookbooks to phone"
+	build
+	for name in Cookbook Cookbook-Digital Cookbook-Tested ; do
+		kdeconnect-cli --share "bazel-bin/${name}.pdf" --name "$PHONE"
+	done
+}
+
 ### /FUNCTIONS GO HERE
 
 function help {
@@ -67,7 +75,7 @@ function help {
     echo "$0 <task> <args>"
     echo "Tasks:"
     compgen -A function | while read name ; do
-		paste <(printf '%s' "$name") <(type "$name" | sed -n '4p')
+		paste <(printf '%s' "$name") <(type "$name" | sed -En 's/^[[:space:]]*: "(.*)";/\1/p')
     done
 }
 
