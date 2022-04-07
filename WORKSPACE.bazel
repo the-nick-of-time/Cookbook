@@ -38,9 +38,9 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 git_repository(
     name = "bazel_deploy",
-    commit = "fcc2e7225544e5d7e9a91a8bd7711809e44dc610",
+    commit = "3a390c71f215280bba0bbe17064ba46ba18110c2",
     remote = "git@nthurmes.duckdns.org:bazel_deploy.git",
-    shallow_since = "1649312638 -0600",
+    shallow_since = "1649346467 -0600",
 )
 
 http_archive(
