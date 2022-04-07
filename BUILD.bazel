@@ -1,5 +1,7 @@
 load("@rules_python//python:defs.bzl", "py_binary")
 load("//:cookbook.bzl", "cookbook")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@bazel_deploy//:deploy.bzl", "deploy")
 
 filegroup(
     name = "packages",
@@ -68,4 +70,22 @@ exports_files(
     srcs = [
         "Cookbook.tex",
     ],
+)
+
+pkg_tar(
+    name = "_editions",
+    srcs = [
+        ":Cookbook",
+        ":Cookbook-Digital",
+        ":Cookbook-Tested",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+deploy(
+    name = "publish",
+    destination = "/var/www/files",
+    host = "nthurmes.duckdns.org",
+    tar = ":_editions",
+    user = "server",
 )

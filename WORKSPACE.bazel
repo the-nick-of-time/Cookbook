@@ -27,9 +27,51 @@ http_archive(
 http_archive(
     name = "github_release_api",
     build_file = "//:github-release-api.BUILD.bazel",
+    patches = ["//:github_release_api.patch"],
+    sha256 = "e7095423f7879c7edf657158fd64094c8c1f20d81920d26a3aaa81880bb2ceae",
     strip_prefix = "pgdurand-github-release-api-cd1c516",
     type = "tgz",
-    sha256 = "e7095423f7879c7edf657158fd64094c8c1f20d81920d26a3aaa81880bb2ceae",
     url = "https://api.github.com/repos/pgdurand/github-release-api/tarball/cd1c51669be47a35c2446d1f774246df4e2e0549",
-    patches= ["//:github_release_api.patch"]
 )
+
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "bazel_deploy",
+    commit = "fcc2e7225544e5d7e9a91a8bd7711809e44dc610",
+    remote = "git@nthurmes.duckdns.org:bazel_deploy.git",
+    shallow_since = "1649312638 -0600",
+)
+
+http_archive(
+    name = "bazel_secrets",
+    patches = ["@bazel_deploy//:secrets.patch"],
+    sha256 = "70dd93d91def7965176469ab3e6b9982775643b4409ccfd18d5e9a9ccbf25e92",
+    strip_prefix = "solarhess-rules_build_secrets-103b222",
+    type = "tgz",
+    urls = [
+        "https://api.github.com/repos/solarhess/rules_build_secrets/tarball/103b222eba64355b93649b06ecfe3844466b5a65",
+    ],
+)
+
+load("@bazel_secrets//lib:secrets.bzl", "environment_secrets")
+
+environment_secrets(
+    name = "keys",
+    entries = {
+        "SERVER_ID": "<REQUIRED>",
+    },
+)
+
+http_archive(
+    name = "rules_pkg",
+    sha256 = "a89e203d3cf264e564fcb96b6e06dd70bc0557356eb48400ce4b5d97c2c3720d",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.5.1/rules_pkg-0.5.1.tar.gz",
+        "https://github.com/bazelbuild/rules_pkg/releases/download/0.5.1/rules_pkg-0.5.1.tar.gz",
+    ],
+)
+
+load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
+
+rules_pkg_dependencies()
