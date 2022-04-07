@@ -38,24 +38,15 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 git_repository(
     name = "bazel_deploy",
-    commit = "3a390c71f215280bba0bbe17064ba46ba18110c2",
+    commit = "6f5ec342c64cae3696d493258450e3d95e70b23f",
     remote = "git@nthurmes.duckdns.org:bazel_deploy.git",
-    shallow_since = "1649346467 -0600",
+    shallow_since = "1649366310 -0600",
 )
 
-http_archive(
-    name = "bazel_secrets",
-    patches = ["@bazel_deploy//:secrets.patch"],
-    sha256 = "70dd93d91def7965176469ab3e6b9982775643b4409ccfd18d5e9a9ccbf25e92",
-    strip_prefix = "solarhess-rules_build_secrets-103b222",
-    type = "tgz",
-    urls = [
-        "https://api.github.com/repos/solarhess/rules_build_secrets/tarball/103b222eba64355b93649b06ecfe3844466b5a65",
-    ],
-)
+load("@bazel_deploy//:deps.bzl", "deploy_dependencies")
+deploy_dependencies()
 
 load("@bazel_secrets//lib:secrets.bzl", "environment_secrets")
-
 environment_secrets(
     name = "keys",
     entries = {
