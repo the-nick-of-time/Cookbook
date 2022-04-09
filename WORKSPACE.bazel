@@ -38,15 +38,17 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 git_repository(
     name = "bazel_deploy",
-    commit = "6f5ec342c64cae3696d493258450e3d95e70b23f",
+    commit = "721c359e742cc93623184ba31dc3f41a7a4d2fa7",
     remote = "git@nthurmes.duckdns.org:bazel_deploy.git",
-    shallow_since = "1649366310 -0600",
+    shallow_since = "1649483039 -0600",
 )
 
 load("@bazel_deploy//:deps.bzl", "deploy_dependencies")
+
 deploy_dependencies()
 
 load("@bazel_secrets//lib:secrets.bzl", "environment_secrets")
+
 environment_secrets(
     name = "keys",
     entries = {
