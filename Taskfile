@@ -33,10 +33,7 @@ function view {
 
 function deploy {
 	: "Copy outputs to pi fileserver"
-	build
-	for name in Cookbook Cookbook-Digital Cookbook-Tested ; do
-		scp -i <(echo SERVER_ID) "bazel-bin/${name}.pdf" "server@nthurmes.duckdns.org:/var/www/files/"
-	done
+	bazel run //:publish
 }
 
 function release {
@@ -56,7 +53,7 @@ function release {
 
 function new {
 	: "Create a new recipe file interactively"
-	./new.sh
+	bazel run //:new
 }
 
 function phone-sync {
@@ -71,9 +68,6 @@ function phone-sync {
 
 function help {
     : "Auto-generate a list of tasks"
-    set +x
-    echo "$0 <task> <args>"
-    echo "Tasks:"
     compgen -A function | while read name ; do
 		paste <(printf '%s' "$name") <(type "$name" | sed -En 's/^[[:space:]]*: "(.*)";/\1/p')
     done
