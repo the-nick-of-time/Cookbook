@@ -60,7 +60,9 @@
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
 
 \newcommand{\dish}[1]{%
-\begin{minipage}{\textwidth}%
+\setcounter{footnote}{0}%
+\setcounter{mpfootnote}{0}%
+\begin{minipage}{\pagewidth}%
 \subfile{entries/#1}%
 \end{minipage}%
 \vfill%
@@ -151,6 +153,10 @@ yeast}
 
 % Otherwise the minipages holding the recipes are indented and extend beyond the right side of the real page
 \setlength{\parindent}{0pt}
+
+% Show footnotes as numbers
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thempfootnote}{\arabic{footnote}}
 
 
 \title{Family Cookbook}
