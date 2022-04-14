@@ -1,5 +1,5 @@
 diff --git packages/BUILD.bazel packages/BUILD.bazel
-index 4b4dc7e..3edf25f 100644
+index 595230b..7e8ec19 100644
 --- packages/BUILD.bazel
 +++ packages/BUILD.bazel
 @@ -165,6 +165,12 @@ latex_package(
@@ -60,7 +60,24 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "hyperref",
      srcs = [
-@@ -574,6 +604,19 @@ latex_package(
+@@ -549,6 +579,16 @@ latex_package(
+     tests = ["lastpage_test.tex"],
+ )
+ 
++latex_package(
++    name = "lettrine",
++    srcs = [
++        ":keyval",
++        ":minifp",
++        "@texlive_texmf__texmf-dist__tex__latex__lettrine",
++    ],
++    tests = ["lettrine_test.tex"],
++)
++
+ latex_package(
+     name = "lineno",
+     srcs = ["@texlive_texmf__texmf-dist__tex__latex__lineno"],
+@@ -564,6 +604,19 @@ latex_package(
      tests = ["l3keys2e_test.tex"],
  )
  
@@ -80,7 +97,7 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "listings",
      srcs = [
-@@ -583,6 +626,14 @@ latex_package(
+@@ -573,6 +626,14 @@ latex_package(
      tests = ["listings_test.tex"],
  )
  
@@ -95,7 +112,40 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "longtable",
      srcs = [":tools"],
-@@ -713,12 +764,33 @@ latex_package(
+@@ -635,6 +696,17 @@ latex_package(
+     tests = ["mfirstuc_test.tex"],
+ )
+ 
++latex_package(
++    name = "mflogo",
++    srcs = [
++        "@texlive_texmf__texmf-dist__fonts__afm__hoekwater__mflogo-font",
++        "@texlive_texmf__texmf-dist__fonts__tfm__public__mflogo",
++        "@texlive_texmf__texmf-dist__fonts__type1__hoekwater__mflogo-font",
++        "@texlive_texmf__texmf-dist__tex__latex__mflogo",
++    ],
++    tests = ["mflogo_test.tex"],
++)
++
+ latex_package(
+     name = "microtype",
+     srcs = [
+@@ -644,6 +716,14 @@ latex_package(
+     tests = ["microtype_test.tex"],
+ )
+ 
++latex_package(
++    name = "minifp",
++    srcs = [
++        "@texlive_texmf__texmf-dist__tex__generic__minifp",
++    ],
++    tests = ["minifp_test.tex"],
++)
++
+ latex_package(
+     name = "mnsymbol",
+     srcs = [
+@@ -684,12 +764,33 @@ latex_package(
      tests = ["multicol_test.tex"],
  )
  
@@ -129,7 +179,7 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "parskip",
      srcs = [
-@@ -770,6 +842,12 @@ latex_package(
+@@ -741,6 +842,12 @@ latex_package(
      tests = ["placeins_test.tex"],
  )
  
@@ -142,7 +192,7 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "silence",
      srcs = ["@texlive_texmf__texmf-dist__tex__latex__silence"],
-@@ -833,6 +911,12 @@ latex_package(
+@@ -804,6 +911,12 @@ latex_package(
      tests = ["subcaption_test.tex"],
  )
  
@@ -155,7 +205,7 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "substr",
      srcs = ["@texlive_texmf__texmf-dist__tex__latex__substr"],
-@@ -845,6 +929,15 @@ latex_package(
+@@ -816,12 +929,30 @@ latex_package(
      tests = ["svn-prov_test.tex"],
  )
  
@@ -171,7 +221,22 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "tabularx",
      srcs = [":tools"],
-@@ -872,12 +965,30 @@ latex_package(
+     tests = ["tabularx_test.tex"],
+ )
+ 
++latex_package(
++    name = "tabulary",
++    srcs = [
++        ":array",
++        "@texlive_texmf__texmf-dist__tex__latex__tabulary",
++    ],
++    tests = ["tabulary_test.tex"],
++)
++
+ latex_package(
+     name = "tcolorbox",
+     srcs = [
+@@ -834,12 +965,32 @@ latex_package(
      tests = ["tcolorbox_test.tex"],
  )
  
@@ -179,9 +244,11 @@ index 4b4dc7e..3edf25f 100644
 +    name = "tengwarscript",
 +    srcs = [
 +        "@texlive_texmf__texmf-dist__tex__latex__tengwarscript",
++        "@texlive_texmf__texmf-dist__fonts__enc__dvips__tengwarscript",
++        "@texlive_texmf__texmf-dist__fonts__map__dvips__tengwarscript",
++        "@texlive_texmf__texmf-dist__fonts__tfm__public__tengwarscript",
 +        ":fp",
 +    ],
-+    # tests = ["tengwarscript_test.tex"],
 +)
 +
  latex_package(
@@ -202,7 +269,7 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "tgheros",
      srcs = [
-@@ -888,6 +999,18 @@ latex_package(
+@@ -850,6 +1001,18 @@ latex_package(
      tests = ["tgheros_test.tex"],
  )
  
@@ -221,7 +288,7 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "tikz",
      srcs = [":pgf"],
-@@ -950,6 +1073,12 @@ latex_package(
+@@ -912,6 +1075,12 @@ latex_package(
      tests = ["ulem_test.tex"],
  )
  
@@ -234,7 +301,29 @@ index 4b4dc7e..3edf25f 100644
  latex_package(
      name = "unicode-math",
      srcs = [
-@@ -991,6 +1120,12 @@ latex_package(
+@@ -921,11 +1090,20 @@ latex_package(
+         "@texlive_texmf__texmf-dist__tex__latex__filehook",
+         "@texlive_texmf__texmf-dist__tex__latex__l3packages__l3keys2e",
+         "@texlive_texmf__texmf-dist__tex__latex__unicode-math",
+-        "@texlive_texmf__texmf-dist__tex__lualatex__lualatex-math"
++        "@texlive_texmf__texmf-dist__tex__lualatex__lualatex-math",
+     ],
+     tests = ["unicode-math_test.tex"],
+ )
+ 
++latex_package(
++    name = "units",
++    srcs = [
++        ":ifthen",
++        "@texlive_texmf__texmf-dist__tex__latex__units",
++    ],
++    tests = ["units_test.tex"],
++)
++
+ latex_package(
+     name = "upquote",
+     srcs = ["@texlive_texmf__texmf-dist__tex__latex__upquote"],
+@@ -944,6 +1122,12 @@ latex_package(
      tests = ["verbatim_test.tex"],
  )
  
@@ -293,6 +382,20 @@ index 0000000..97de453
 +    \end{tabular}
 +\end{document}
 \ No newline at end of file
+diff --git packages/lettrine_test.tex packages/lettrine_test.tex
+new file mode 100644
+index 0000000..b74cf1c
+--- /dev/null
++++ packages/lettrine_test.tex
+@@ -0,0 +1,8 @@
++\documentclass{report}
++\usepackage{lettrine}
++\begin{document}
++    \lettrine[lraise=0.1, nindent=0em, slope=-.5em]{T}{his} is an example.
++    With a long enough text, the first letter should be dropped on the second
++    line as well.
++    The third line, on the other hand, should not be impacted at all.
++\end{document}
 diff --git packages/libertine_test.tex packages/libertine_test.tex
 new file mode 100644
 index 0000000..e742c03
@@ -303,6 +406,30 @@ index 0000000..e742c03
 +\usepackage{libertine}
 +\begin{document}
 +This text should be in the libertine font.
++\end{document}
+diff --git packages/mflogo_test.tex packages/mflogo_test.tex
+new file mode 100644
+index 0000000..7388659
+--- /dev/null
++++ packages/mflogo_test.tex
+@@ -0,0 +1,6 @@
++\documentclass{report}
++\usepackage{mflogo}
++\begin{document}
++    This is a piece of text that uses mflogo.
++    \MP
++\end{document}
+diff --git packages/minifp_test.tex packages/minifp_test.tex
+new file mode 100644
+index 0000000..b48105c
+--- /dev/null
++++ packages/minifp_test.tex
+@@ -0,0 +1,6 @@
++\documentclass{report}
++\usepackage{minifp}
++\begin{document}
++    \MFPadd{1.2}{3.4}\X
++    \X
 +\end{document}
 diff --git packages/nicefrac_test.tex packages/nicefrac_test.tex
 new file mode 100644
@@ -344,14 +471,14 @@ index 0000000..fcc45fa
 \ No newline at end of file
 diff --git packages/pict2e_test.tex packages/pict2e_test.tex
 new file mode 100644
-index 0000000..cfc4edf
+index 0000000..c1a3298
 --- /dev/null
 +++ packages/pict2e_test.tex
 @@ -0,0 +1,5 @@
 +\documentclass{article}
 +\usepackage{pict2e}
 +\begin{document}
-+    
++
 +\end{document}
 \ No newline at end of file
 diff --git packages/subfiles_child_test.tex packages/subfiles_child_test.tex
@@ -379,6 +506,19 @@ index 0000000..194d359
 +    \subfile{subfiles_child_test.tex}
 +\end{document}
 \ No newline at end of file
+diff --git packages/tabulary_test.tex packages/tabulary_test.tex
+new file mode 100644
+index 0000000..e64b1c6
+--- /dev/null
++++ packages/tabulary_test.tex
+@@ -0,0 +1,7 @@
++\documentclass{report}
++\usepackage{tabulary}
++\begin{document}
++    \begin{tabulary}{1.0\textwidth}{|p{.3\textwidth}|p{.7\textwidth}|}
++        a & b\\
++    \end{tabulary}
++\end{document}
 diff --git packages/tengwarscript_test.tex packages/tengwarscript_test.tex
 new file mode 100644
 index 0000000..8fe7924
@@ -423,3 +563,154 @@ index 0000000..70d58ee
 +    IDK what this package does
 +\end{document}
 \ No newline at end of file
+diff --git packages/units_test.tex packages/units_test.tex
+new file mode 100644
+index 0000000..43f8a9d
+--- /dev/null
++++ packages/units_test.tex
+@@ -0,0 +1,5 @@
++\documentclass{report}
++\usepackage{units}
++\begin{document}
++    \unitfrac[1]{2}{3}{m}
++\end{document}
+diff --git patches/tengwarscript.patch patches/tengwarscript.patch
+new file mode 100644
+index 0000000..6f98243
+--- /dev/null
++++ patches/tengwarscript.patch
+@@ -0,0 +1,108 @@
++diff --git annatar.cfg annatar.cfg
++index 310d90c..a709de8 100644
++--- annatar.cfg
+++++ annatar.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarannatar}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{tngan_full }%
+++  \def\teng@usefont{tngan }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.05ex]{\teng@strutwidth}{1.30ex}\kern-\teng@strutwidth}%
++diff --git annatarbold.cfg annatarbold.cfg
++index 9002590..2d66f4d 100644
++--- annatarbold.cfg
+++++ annatarbold.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarannatarbold}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{tnganb_full }%
+++  \def\teng@usefont{tnganb }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.05ex]{\teng@strutwidth}{1.30ex}\kern-\teng@strutwidth}%
++diff --git annatarbolditalic.cfg annatarbolditalic.cfg
++index 8534eba..ac427a9 100644
++--- annatarbolditalic.cfg
+++++ annatarbolditalic.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarannatarbolditalic}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{tnganbi_full }%
+++  \def\teng@usefont{tnganbi }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.05ex]{\teng@strutwidth}{1.20ex}\kern-\teng@strutwidth}%
++diff --git annataritalic.cfg annataritalic.cfg
++index 4dc84e6..45a793b 100644
++--- annataritalic.cfg
+++++ annataritalic.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarannataritalic}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{tngani_full }%
+++  \def\teng@usefont{tngani }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.05ex]{\teng@strutwidth}{1.20ex}\kern-\teng@strutwidth}%
++diff --git formal.cfg formal.cfg
++index df050eb..b74ace3 100644
++--- formal.cfg
+++++ formal.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarformal}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{TengwarFormal_full }%
+++  \def\teng@usefont{TengwarFormal }%
++   \FPmul{\teng@defaultmag}{1500}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.10ex]{\teng@strutwidth}{0.95ex}\kern-\teng@strutwidth}%
++diff --git noldor.cfg noldor.cfg
++index c9efee7..8926b2b 100644
++--- noldor.cfg
+++++ noldor.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarnoldor}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{TengwarNoldor_full }%
+++  \def\teng@usefont{TengwarNoldor }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.05ex]{\teng@strutwidth}{1.35ex}\kern-\teng@strutwidth}%
++diff --git parmaite.cfg parmaite.cfg
++index 00b26c0..0af9e05 100644
++--- parmaite.cfg
+++++ parmaite.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarparmaite}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{Parmaite_full }%
+++  \def\teng@usefont{Parmaite }%
++   \FPmul{\teng@defaultmag}{1700}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.03ex]{\teng@strutwidth}{0.90ex}\kern-\teng@strutwidth}%
++diff --git quenya.cfg quenya.cfg
++index 17a1e9e..33659ac 100644
++--- quenya.cfg
+++++ quenya.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarquenya}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{TengwarQuenya_full }%
+++  \def\teng@usefont{TengwarQuenya }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.03ex]{\teng@strutwidth}{1.28ex}\kern-\teng@strutwidth}%
++diff --git sindarin.cfg sindarin.cfg
++index 411a458..b41a3d6 100644
++--- sindarin.cfg
+++++ sindarin.cfg
++@@ -1,6 +1,6 @@
++ \newcommand{\tengwarsindarin}[1][1.0]{%
++   % font parameters
++-  \def\teng@usefont{TengwarSindarin_full }%
+++  \def\teng@usefont{TengwarSindarin }%
++   \FPmul{\teng@defaultmag}{1100}{#1}%
++   % struts
++   \def\teng@strutn{\rule[-0.13ex]{\teng@strutwidth}{1.33ex}\kern-\teng@strutwidth}%
+diff --git repositories.bzl repositories.bzl
+index 8ae14de..fe58927 100644
+--- repositories.bzl
++++ repositories.bzl
+@@ -4881,7 +4881,7 @@ _TEXLIVE_MODULAR_PACKAGES_OTHER = [
+     ("texmf/texmf-dist/tex/latex/ted", "5b9d0f42c2618b6edea62f9112e5eacc945f8f8d6550926e9f39277101ff9e29", []),
+     ("texmf/texmf-dist/tex/latex/templatetools", "a0145f221c86841ab02f6f9cea04e8f61b2c06b6bc184be6753be96f4c6c62ab", []),
+     ("texmf/texmf-dist/tex/latex/tempora", "e3638d06a7e7d6b257b5a181faa572537b4a954fe55a0815e675186094282702", []),
+-    ("texmf/texmf-dist/tex/latex/tengwarscript", "babb1452152bbd1e1783b52a2a4add3c740a8d139aac55a7862b92cb87ee4266", []),
++    ("texmf/texmf-dist/tex/latex/tengwarscript", "babb1452152bbd1e1783b52a2a4add3c740a8d139aac55a7862b92cb87ee4266", ["@bazel_latex//:patches/tengwarscript.patch"]),
+     ("texmf/texmf-dist/tex/latex/tensor", "a8fea2c2d56c679094dc335d04d3677f4ea31bf0aed588698b5a682831cf49d5", []),
+     ("texmf/texmf-dist/tex/latex/termcal-de", "222b3f8f73d9420afa84d0487acbda6d08f854a3b6eaeb0e2fb5e57a6ef9a729", []),
+     ("texmf/texmf-dist/tex/latex/termcal", "ae9d56b38d2b57aeab214b005297dc40b17e67e4a6ad567cb082ada6f6b4a74e", []),
+diff --git run_lualatex.py run_lualatex.py
+index c8ccf62..81e9740 100644
+--- run_lualatex.py
++++ run_lualatex.py
+@@ -66,7 +66,7 @@ shutil.copy("texmf/texmf-dist/scripts/texlive/fmtutil.pl", "bin/mktexfmt")
+ return_code = subprocess.call(
+     args=[
+         latexrun_file,
+-        "--latex-args=-shell-escape -jobname=" + job_name,
++        "--latex-args=-shell-escape -jobname='" + job_name.replace("'", "'\\''") + "'",
+         "--latex-cmd=lualatex",
+         "-Wall",
+     ] + sys.argv[ARGS_COUNT:] + [main_file],

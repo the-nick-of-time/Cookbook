@@ -7,6 +7,7 @@ load("@keys//:secrets.bzl", "SERVER_ID")
 filegroup(
     name = "packages",
     srcs = [
+        "@annatar",
         "@bazel_latex//packages:booktabs",
         "@bazel_latex//packages:cuisine",
         "@bazel_latex//packages:diagbox",
@@ -16,11 +17,13 @@ filegroup(
         "@bazel_latex//packages:geometry",
         "@bazel_latex//packages:hhline",
         "@bazel_latex//packages:hyperref",
+        "@bazel_latex//packages:luatex85",
         "@bazel_latex//packages:nicefrac",
         "@bazel_latex//packages:siunitx",
         "@bazel_latex//packages:subfiles",
         "@bazel_latex//packages:substr",
         "@bazel_latex//packages:tabularx",
+        "@bazel_latex//packages:tengwarscript",
         "@bazel_latex//packages:thumbs",
     ],
     visibility = ["//visibility:public"],
