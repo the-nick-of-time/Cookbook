@@ -13,3 +13,13 @@ def cookbook(name):
             ":volume-table",
         ],
     )
+
+def recipe(src):
+    latex_document(
+        name = src.rsplit(".", 1)[0],
+        srcs = [
+            "//:Cookbook.tex",
+            "//:packages",
+        ],
+        main = src,
+    )
