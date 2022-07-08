@@ -43,7 +43,6 @@
 \usepackage{subfiles}
 \let\footruleskip\undefined
 \usepackage{fancyhdr}
-\usepackage{xspace}
 \usepackage{thumbs}
 \usepackage{tabularx}
 \def\arraystretch{1.25}
@@ -114,24 +113,16 @@ end
 % Allow things to pull away from the bottom of the page avoiding weird spacing issues on chapter pages
 \raggedbottom
 
-\newcommand{\ap}{all-purpose\xspace}
-\newcommand{\ww}{whole wheat\xspace}
-\newcommand{\wwp}{whole wheat pastry\xspace}
-\newcommand{\wwb}{whole wheat bread\xspace}
+\newcommand{\ap}{all-purpose}
+\newcommand{\ww}{whole wheat}
+\newcommand{\wwp}{whole wheat pastry}
+\newcommand{\wwb}{whole wheat bread}
 \newcommand{\tooth}[1]{until a toothpick comes out clean, about #1 minutes.}
 
 % Referencing a page will basically always be with "page X"
 \let\plainpageref\pageref
 \newcommand{\reciperef}[1]{page~\plainpageref{#1}}
 
-\LuaCodeDebugOn
-% \newcommand{\flour}[3][]{%
-% \def\denominator#1 %
-% \def\type#2 %
-% \def\numerator#3 %
-% \directlua{tex.print(doc.density("\type flour", "cup", 150, "\numerator", "\denominator"))}%
-% }
-% \newcommand{\flour}[3]{\directlua{tex.print(doc.density("#1 flour", "cup", 150, "#2", "#3"))}}
 \DeclareDocumentCommand{\flour}{ m m g }{%
 \directlua{tex.print(doc.density(\luastring{#1} .. " flour", "cup", 150, "#2", \IfNoValueTF{#3}{""}{"#3"}))}%
 }
