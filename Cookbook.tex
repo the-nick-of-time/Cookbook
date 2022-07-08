@@ -52,8 +52,6 @@
 \usepackage{nicefrac}
 \let\fr\nicefrac
 \usepackage{siunitx}
-\usepackage{fp}
-\usepackage{xparse}
 \usepackage{booktabs}
 \usepackage{luatex85}
 \pdfmapfile{+tengwarscript.map}
@@ -72,6 +70,26 @@ end
 
 doc.round_to_nearest = function(n, threshold)
     return doc.round(n / threshold) * threshold
+end
+
+doc.pluralize = function(word, number)
+	if number == 1 then
+		return word
+	else
+		return word .. "s"
+	end
+end
+
+doc.density = function(name, measure, dens, numerator, denominator)
+	if denominator == "" then
+		frac = numerator
+	else
+		denominator = tonumber(denominator)
+		frac = "\\fr{" .. numerator .. "}{" .. denominator .. "}"
+	end
+	local m = doc.pluralize(measure, tonumber(numerator))
+	local mass = doc.round(tonumber(numerator) / tonumber(denominator) * dens)
+	return frac .. " " .. m .. " (" .. mass .. " grams) " .. name
 end
 \end{luacode}
 
@@ -99,20 +117,9 @@ end
 \let\plainpageref\pageref
 \newcommand{\reciperef}[1]{page~\plainpageref{#1}}
 
-\DeclareDocumentCommand{\flour}{ m m g }{%
-\IfNoValueTF{#3}{#2}{\fr{{#2}}{{#3}}} % if two numbers, interpret as #2/#3
-cup\IfNoValueTF{#3}{\ifthenelse{\equal{#2}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
-\FPupn\grams{\IfNoValueTF{#3}{#2}{#3 #2 /} 150 * 0 round}%
-(\FPprint{\grams} grams) %
-#1 flour}
+\newcommand{\flour}[3]{\directlua{tex.print(doc.density("#1 flour", "cup", 150, "#2", "#3"))}}
 
-
-\DeclareDocumentCommand{\yeast}{ m g }{%
-\IfNoValueTF{#2}{#1}{\fr{#1}{#2}} % if two arguments, interpret as #1/#2
-teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argument and that argument is exactly "1" then omit -s, else include it
-\FPupn\grams{\IfNoValueTF{#2}{#1}{#2 #1 /} 3.4 * 0 round}%
-(\FPprint{\grams} grams) %
-yeast}
+\newcommand{\yeast}[2]{\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", "#2"))}}
 
 \newcommand{\tempf}[1]{#1\0F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\0C)}
 
