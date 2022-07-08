@@ -58,6 +58,22 @@
 \usepackage{luatex85}
 \pdfmapfile{+tengwarscript.map}
 \usepackage[annatar]{tengwarscript}
+\usepackage{luacode}
+
+\begin{luacode}
+doc=doc or {}
+doc.f_to_c = function(f)
+	return (f - 32) * (5 / 9)
+end
+
+doc.round = function(n)
+	return math.floor(n + 0.5)
+end
+
+doc.round_to_nearest = function(n, threshold)
+    return doc.round(n / threshold) * threshold
+end
+\end{luacode}
 
 
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
@@ -98,10 +114,7 @@ teaspoon\IfNoValueTF{#2}{\ifthenelse{\equal{#1}{1}}{}{s}}{s} % if only one argum
 (\FPprint{\grams} grams) %
 yeast}
 
-\newcommand{\tempf}[1]{#1\0F (%
-% divide then multiply by 5 to round to nearest 5
-\FPeval\celsiusvalue{round(round((#1 - 32) * (5. / 9) / 5, 0) * 5, 0)}%
-\FPprint{\celsiusvalue}\0C)}
+\newcommand{\tempf}[1]{#1\0F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\0C)}
 
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
 \newcommand{\preheat}[1]{Preheat oven to \tempf{#1}.}

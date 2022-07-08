@@ -17,6 +17,7 @@ filegroup(
         "@bazel_latex//packages:geometry",
         "@bazel_latex//packages:hhline",
         "@bazel_latex//packages:hyperref",
+        "@bazel_latex//packages:luacode",
         "@bazel_latex//packages:luatex85",
         "@bazel_latex//packages:nicefrac",
         "@bazel_latex//packages:siunitx",
