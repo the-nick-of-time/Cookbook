@@ -52,6 +52,7 @@
 \usepackage{nicefrac}
 \let\fr\nicefrac
 \usepackage{siunitx}
+\usepackage{xparse}
 \usepackage{booktabs}
 \usepackage{luatex85}
 \pdfmapfile{+tengwarscript.map}
@@ -59,6 +60,7 @@
 \usepackage{luacode}
 
 \begin{luacode}
+texio.write_nl("Hello global world")
 doc=doc or {}
 doc.f_to_c = function(f)
 	return (f - 32) * (5 / 9)
@@ -81,14 +83,19 @@ doc.pluralize = function(word, number)
 end
 
 doc.density = function(name, measure, dens, numerator, denominator)
+	texio.write_nl("Hello density world")
+	-- tex.print("=== DEBUG |" .. name .. "|" .. measure .. "|" .. numerator .. "|" .. denominator .. "|")
+	local frac = nil
+	local d = nil
 	if denominator == "" then
 		frac = numerator
+		d = 1
 	else
-		denominator = tonumber(denominator)
+		d = tonumber(denominator)
 		frac = "\\fr{" .. numerator .. "}{" .. denominator .. "}"
 	end
 	local m = doc.pluralize(measure, tonumber(numerator))
-	local mass = doc.round(tonumber(numerator) / tonumber(denominator) * dens)
+	local mass = doc.round(tonumber(numerator) / d * dens)
 	return frac .. " " .. m .. " (" .. mass .. " grams) " .. name
 end
 \end{luacode}
@@ -117,7 +124,17 @@ end
 \let\plainpageref\pageref
 \newcommand{\reciperef}[1]{page~\plainpageref{#1}}
 
-\newcommand{\flour}[3]{\directlua{tex.print(doc.density("#1 flour", "cup", 150, "#2", "#3"))}}
+\LuaCodeDebugOn
+% \newcommand{\flour}[3][]{%
+% \def\denominator#1 %
+% \def\type#2 %
+% \def\numerator#3 %
+% \directlua{tex.print(doc.density("\type flour", "cup", 150, "\numerator", "\denominator"))}%
+% }
+% \newcommand{\flour}[3]{\directlua{tex.print(doc.density("#1 flour", "cup", 150, "#2", "#3"))}}
+\DeclareDocumentCommand{\flour}{ m m g }{%
+\directlua{tex.print(doc.density(\luastring{#1} .. " flour", "cup", 150, "#2", \IfNoValueTF{#3}{""}{"#3"}))}%
+}
 
 \newcommand{\yeast}[2]{\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", "#2"))}}
 
