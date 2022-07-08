@@ -127,7 +127,9 @@ end
 \directlua{tex.print(doc.density(\luastring{#1} .. " flour", "cup", 150, "#2", \IfNoValueTF{#3}{""}{"#3"}))}%
 }
 
-\newcommand{\yeast}[2]{\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", "#2"))}}
+\DeclareDocumentCommand{\yeast}{ m g }{%
+\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
+}
 
 \newcommand{\tempf}[1]{#1\0F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\0C)}
 
