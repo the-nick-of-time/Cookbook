@@ -59,7 +59,6 @@
 \usepackage{luacode}
 
 \begin{luacode}
-texio.write_nl("Hello global world")
 doc=doc or {}
 doc.f_to_c = function(f)
 	return (f - 32) * (5 / 9)
@@ -82,8 +81,6 @@ doc.pluralize = function(word, number)
 end
 
 doc.density = function(name, measure, dens, numerator, denominator)
-	texio.write_nl("Hello density world")
-	-- tex.print("=== DEBUG |" .. name .. "|" .. measure .. "|" .. numerator .. "|" .. denominator .. "|")
 	local frac = nil
 	local d = nil
 	if denominator == "" then
@@ -103,9 +100,9 @@ end
 \newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
 
 \newcommand{\dish}[1]{%
+\begin{minipage}{\pagewidth}%
 \setcounter{footnote}{0}%
 \setcounter{mpfootnote}{0}%
-\begin{minipage}{\pagewidth}%
 \subfile{entries/#1}%
 \end{minipage}%
 \vfill%
