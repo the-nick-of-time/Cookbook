@@ -51,12 +51,11 @@
 \usepackage{siunitx}
 \usepackage{xparse}
 \usepackage{booktabs}
-\usepackage{luatex85}
-\pdfmapfile{+tengwarscript.map}
-\usepackage[annatar]{tengwarscript}
-\usepackage{luacode}
+\usepackage{usetengwar}
+\usepackage{luamacros}
 
 \directlua{doc = require("functions")}
+
 
 \newcommand{\dish}[1]{%
 \begin{minipage}{\pagewidth}%
@@ -79,23 +78,6 @@
 \let\plainpageref\pageref
 \newcommand{\reciperef}[1]{page~\plainpageref{#1}}
 
-\DeclareDocumentCommand{\flour}{ m m g }{%
-\directlua{tex.print(doc.density(\luastring{#1} .. " flour", "cup", 150, "#2", \IfNoValueTF{#3}{""}{"#3"}))}%
-}
-
-\DeclareDocumentCommand{\yeast}{ m g }{%
-\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
-}
-
-\DeclareDocumentCommand{\cornmeal}{ m g }{%
-\directlua{tex.print(doc.density("cornmeal", "cup", 140, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
-}
-
-\DeclareDocumentCommand{\milk}{ m g }{%
-\directlua{tex.print(doc.density("milk", "cup", 240, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
-}
-
-\newcommand{\tempf}[1]{#1\0F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\0C)}
 
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
 \newcommand{\preheat}[1]{Preheat oven to \tempf{#1}.}
