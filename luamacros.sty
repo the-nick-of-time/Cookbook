@@ -1,0 +1,30 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{luamacros}[2022/07/13 The Lua code used in the document]
+
+\RequirePackage{luacode}
+\RequirePackage{xparse}
+\RequirePackage{siunitx}
+
+% Globally declared functions
+\directlua{doc = require("functions")}
+
+% Macros employing the density lua function
+\DeclareDocumentCommand{\flour}{ m m g }{%
+\directlua{tex.print(doc.density(\luastring{#1} .. " flour", "cup", 150, "#2", \IfNoValueTF{#3}{""}{"#3"}))}%
+}
+
+\DeclareDocumentCommand{\yeast}{ m g }{%
+\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
+}
+
+\DeclareDocumentCommand{\cornmeal}{ m g }{%
+\directlua{tex.print(doc.density("cornmeal", "cup", 140, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
+}
+
+\DeclareDocumentCommand{\milk}{ m g }{%
+\directlua{tex.print(doc.density("milk", "cup", 240, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
+}
+
+
+% Macro for the temperature conversion function
+\newcommand{\tempf}[1]{#1\si{\degree}F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\si{\degree}C)}
