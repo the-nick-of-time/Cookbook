@@ -2,7 +2,6 @@
 \ProvidesPackage{luamacros}[2022/07/13 The Lua code used in the document]
 
 \RequirePackage{luacode}
-\RequirePackage{xparse}
 \RequirePackage{siunitx}
 
 % Globally declared functions
@@ -11,17 +10,11 @@
 % Macros employing the density lua function
 \newcommand{\flour}[2]{\directlua{tex.print(doc.density(\luastring{#1} .. " flour", "cup", 150, \luastring{#2}))}}
 
-\DeclareDocumentCommand{\yeast}{ m g }{%
-\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
-}
+\newcommand{\yeast}[1]{\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, \luastring{#1}))}}
 
-\DeclareDocumentCommand{\cornmeal}{ m g }{%
-\directlua{tex.print(doc.density("cornmeal", "cup", 140, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
-}
+\newcommand{\cornmeal}[1]{\directlua{tex.print(doc.density("cornmeal", "cup", 140, \luastring{#1}))}}
 
-\DeclareDocumentCommand{\milk}{ m g }{%
-\directlua{tex.print(doc.density("milk", "cup", 240, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
-}
+\newcommand{\milk}[1]{\directlua{tex.print(doc.density("milk", "cup", 240, \luastring{#1}))}}
 
 
 % Macro for the temperature conversion function
