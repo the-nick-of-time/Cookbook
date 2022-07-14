@@ -18,18 +18,28 @@ local function pluralize(word, number)
 	end
 end
 
-local function density(name, measure, dens, numerator, denominator)
-	local frac = nil
-	local d = nil
-	if denominator == "" then
-		frac = numerator
-		d = 1
-	else
-		d = tonumber(denominator)
-		frac = "\\fr{" .. numerator .. "}{" .. denominator .. "}"
+local function split_frac(fraction)
+	-- check for fraction form
+	n, d = string.gmatch(fraction, "(%d+)/(%d+)")()
+	if n then
+		return tonumber(n), tonumber(d)
 	end
-	local m = pluralize(measure, tonumber(numerator))
-	local mass = round(tonumber(numerator) / d * dens)
+	-- check for single number
+	local whole = string.gmatch(fraction, "%d+")()
+	return tonumber(whole), 1
+end
+
+local function density(name, measure, dens, quantity)
+	local n, d = split_frac(quantity)
+	texio.write("numerator: " .. n .. " denominator: " .. d)
+	local frac = nil
+	if d == 1 then
+		frac = n
+	else
+		frac = "\\fr{" .. n .. "}{" .. d .. "}"
+	end
+	local m = pluralize(measure, n)
+	local mass = round(n / d * dens)
 	return frac .. " " .. m .. " (" .. mass .. " grams) " .. name
 end
 
