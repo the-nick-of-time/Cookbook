@@ -2,6 +2,8 @@
 \ProvidesPackage{luamacros}[2022/07/13 The Lua code used in the document]
 
 \RequirePackage{luacode}
+\RequirePackage{xparse}
+\RequirePackage{siunitx}
 
 % Globally declared functions
 \directlua{doc = require("functions")}
@@ -25,4 +27,4 @@
 
 
 % Macro for the temperature conversion function
-\newcommand{\tempf}[1]{#1\0F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\0C)}
+\newcommand{\tempf}[1]{#1\si{\degree}F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\si{\degree}C)}

@@ -14,6 +14,7 @@ def cookbook(name):
             "functions.lua",
             "usetengwar.sty",
             "luamacros.sty",
+            "formatting.sty",
         ],
     )
 

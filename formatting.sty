@@ -1,0 +1,73 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{formatting}[2022/07/13 Sections of the preamble that control the formatting of the document]
+
+\RequirePackage{diagbox}
+\RequirePackage{booktabs}
+\RequirePackage{hhline}
+\RequirePackage{tabularx}
+
+\let\footruleskip\undefined
+\RequirePackage{fancyhdr}
+
+
+\def\arraystretch{1.25}
+\def\belowcaptionskip{0.2em}
+
+
+% Define a macro for the current chapter name
+%https://tex.stackexchange.com/questions/310046/fancyhdr-and-redefinition-of-leftmark-rightmark
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% enddef
+
+\fancypagestyle{frontmaterial}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\footskip}{.6in}
+	\pagenumbering{roman}
+	\fancyfoot[C]{\thepage}
+	\fancyhead[RE,LO]{\thepage}
+}
+
+\fancypagestyle{main}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\footskip}{.6in}
+	\pagenumbering{arabic}
+	\fancyhead[RE,LO]{\thepage}
+	\fancyhead[RO,LE]{\MakeUppercase{\large\textbf{\leftmark}}}
+	\fancyfoot[C]{\normalsize \thepage\ of\ \pageref{LastPage}}
+}
+
+\newcommand{\frontsetup}{
+	\pagestyle{frontmaterial}
+	\fancypagestyle{plain}{
+		\pagestyle{frontmaterial}
+		% But with no header because that would be ugly on the already mostly empty top quarter of the page
+		\fancyhead{}
+	}
+}
+
+\newcommand{\mainsetup}{
+	% If the newpage isn't here, the last page of the table of contents will be affected by this setup
+	\newpage
+	% Conditionally add a clear page to make the main stuff with the new page numbering start on an odd page otherwise page margins and thumb mark side will be wrong as long as the TOC spans an odd number of pages
+	% I would prefer to avoid a blank page because this isn't a formal thing and is mostly intended as a digital document anyway but latex doesn't like violating ~common typesetting conventions~ like right side == odd page
+	{\thispagestyle{empty} \cleardoublepage}
+	\pagestyle{main}
+	\fancypagestyle{plain}{
+		\pagestyle{main}
+		% But with no header because that would be ugly on the already mostly empty top quarter of the page
+		\fancyhead{}
+	}
+}
+
+% Otherwise the minipages holding the recipes are indented and extend beyond the right side of the real page
+\setlength{\parindent}{0pt}
+
+% Show footnotes as numbers
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thempfootnote}{\arabic{footnote}}
+
+% Allow things to pull away from the bottom of the page avoiding weird spacing issues on chapter pages
+\raggedbottom
