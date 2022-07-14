@@ -128,6 +128,14 @@ end
 \directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
 }
 
+\DeclareDocumentCommand{\cornmeal}{ m g }{%
+\directlua{tex.print(doc.density("cornmeal", "cup", 140, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
+}
+
+\DeclareDocumentCommand{\milk}{ m g }{%
+\directlua{tex.print(doc.density("milk", "cup", 240, "#1", \IfNoValueTF{#2}{""}{"#2"}))}%
+}
+
 \newcommand{\tempf}[1]{#1\0F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\0C)}
 
 \newcommand{\thumbmark}[1]{\ifthenelse{\equal{\showthumb}{true}}{\addthumb{#1}{\Roman{chapter}}{black}{gray}}{}}
