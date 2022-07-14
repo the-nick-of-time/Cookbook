@@ -64,6 +64,16 @@ function phone-sync {
 	done
 }
 
+function coverage {
+	: "Check that all files in entries/ are used"
+	for f in entries/* ; do
+		if ! grep -q "$(basename "$f" .tex)" Cookbook.tex ; then
+			if [ "$f" = "entries/template.tex" ] || [ "$f" = "entries/BUILD.bazel" ] ; then continue ; fi
+			echo "$f is not used in the cookbook"
+		fi
+	done
+}
+
 ### /FUNCTIONS GO HERE
 
 function help {
