@@ -17,12 +17,10 @@
 	\def\showthumb{true}
 \fi
 
-\usepackage{ifthen}
-\newboolean{showuntested}
 \if\jobis{Cookbook-Tested}
-	\setboolean{showuntested}{false}
+	\newcommand{\untested}[1]{}
 \else
-	\setboolean{showuntested}{true}
+	\newcommand{\untested}[1]{#1}
 \fi
 
 
@@ -58,46 +56,7 @@
 \usepackage[annatar]{tengwarscript}
 \usepackage{luacode}
 
-\begin{luacode}
-doc=doc or {}
-doc.f_to_c = function(f)
-	return (f - 32) * (5 / 9)
-end
-
-doc.round = function(n)
-	return math.floor(n + 0.5)
-end
-
-doc.round_to_nearest = function(n, threshold)
-    return doc.round(n / threshold) * threshold
-end
-
-doc.pluralize = function(word, number)
-	if number == 1 then
-		return word
-	else
-		return word .. "s"
-	end
-end
-
-doc.density = function(name, measure, dens, numerator, denominator)
-	local frac = nil
-	local d = nil
-	if denominator == "" then
-		frac = numerator
-		d = 1
-	else
-		d = tonumber(denominator)
-		frac = "\\fr{" .. numerator .. "}{" .. denominator .. "}"
-	end
-	local m = doc.pluralize(measure, tonumber(numerator))
-	local mass = doc.round(tonumber(numerator) / d * dens)
-	return frac .. " " .. m .. " (" .. mass .. " grams) " .. name
-end
-\end{luacode}
-
-
-\newcommand{\untested}[1]{\ifthenelse{\boolean{showuntested}}{#1}{}}
+\directlua{doc = require("functions")}
 
 \newcommand{\dish}[1]{%
 \begin{minipage}{\pagewidth}%
