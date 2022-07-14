@@ -66,9 +66,7 @@
 \newcommand{\tooth}[1]{until a toothpick comes out clean, about #1 minutes.}
 
 % Referencing a page will basically always be with "page X"
-\let\plainpageref\pageref
-\newcommand{\reciperef}[1]{page~\plainpageref{#1}}
-
+\newcommand{\reciperef}[1]{page~\pageref{#1}}
 
 \newcommand{\thumbmark}[1]{%
 \ifshowthumb%
@@ -503,17 +501,16 @@
 \input{volume-table.tex}
 
 
-1 pint = 2 cups
-
-1 quart = 2 pints = 4 cups
-
-1 gallon = 4 quarts = 8 pints = 16 cups = 128 fluid ounces
-
-1 liter = 34 fluid ounces \(\approx\) 1 quart
-
-1 packet yeast = \fr52 teaspoons = 9 grams
-
-% 1 teaspoon yeast = 0.1 ounces = 3.4 grams
+\begin{table}[h]
+	\centering
+	\label{tab:extraunits}
+	\caption{Extra units in use in recipes}
+	\begin{tabular}{cc}
+		quart & 2 pints \\
+		gallon & 4 quarts \\
+		packet yeast & \fr52 teaspoons
+	\end{tabular}
+\end{table}
 
 \begin{table}[h]
 	\centering
