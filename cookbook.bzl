@@ -12,6 +12,8 @@ def cookbook(name):
             ":density-table",
             ":volume-table",
             "functions.lua",
+            "usetengwar.sty",
+            "luamacros.sty",
         ],
     )
 
