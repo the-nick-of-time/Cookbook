@@ -25,6 +25,7 @@ filegroup(
         "@bazel_latex//packages:tabularx",
         "@bazel_latex//packages:tengwarscript",
         "@bazel_latex//packages:thumbs",
+        "@usetengwar//:packages",
     ],
     visibility = ["//visibility:public"],
 )
@@ -35,7 +36,6 @@ filegroup(
         "formatting.sty",
         "functions.lua",
         "luamacros.sty",
-        "usetengwar.sty",
         "@annatar",
     ],
     visibility = ["//visibility:public"],

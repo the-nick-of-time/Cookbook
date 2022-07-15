@@ -63,12 +63,13 @@ load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 
 rules_pkg_dependencies()
 
-http_archive(
-    name = "annatar",
-    build_file_content = "filegroup(name='annatar', srcs=['tngan.ttf', 'tngani.ttf', 'tnganb.ttf', 'tnganbi.ttf'], visibility=['//visibility:public'])",
-    sha256 = "4081da14f5e06694e0276c913a21c533fe75e32846112d5271590eda37e009be",
-    urls = [
-        "http://nthurmes.duckdns.org/files/tngan120.zip",
-        "http://web.archive.org/web/20150908132446if_/http://web.comhem.se/alatius/fonts/tngan120.zip",
-    ],
+git_repository(
+    name = "usetengwar",
+    commit = "192e6b09add39a5cf0723af0debfe6619755277d",
+    remote = "git@nthurmes.duckdns.org:tengwarscript.git",
+    shallow_since = "1657869313 -0600",
 )
+
+load("@usetengwar//:deps.bzl", "tengwar_fonts")
+
+tengwar_fonts("annatar")
