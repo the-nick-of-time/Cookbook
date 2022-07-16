@@ -43,6 +43,7 @@
 \usepackage{nicefrac}
 \let\fr\nicefrac
 \usepackage{siunitx}
+\usepackage{etoolbox}
 
 % Local sty files
 \usepackage{formatting}
@@ -73,7 +74,13 @@
 \addthumb{#1}{\Roman{chapter}}{black}{gray}%
 \fi%
 }
-\newcommand{\preheat}[1]{Preheat oven to \tempf{#1}.}
+\newcommand{\preheat}[2][sentence]{\ifstrequal{#1}{sentence}%
+	{Preheat oven to \tempf{#2}.}%
+{\ifstrequal{#1}{beginning}%
+	{Preheat oven to \tempf{#2}}%
+{\ifstrequal{#1}{fragment}%
+	{preheat oven to \tempf{#2}}%
+{}}}}
 
 
 
