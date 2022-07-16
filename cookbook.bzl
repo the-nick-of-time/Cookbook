@@ -11,10 +11,7 @@ def cookbook(name):
             ":packages",
             ":density-table",
             ":volume-table",
-            "functions.lua",
-            "usetengwar.sty",
-            "luamacros.sty",
-            "formatting.sty",
+            "//:supporting",
         ],
     )
 
@@ -24,6 +21,7 @@ def recipe(src):
         srcs = [
             "//:Cookbook.tex",
             "//:packages",
+            "//:supporting",
         ],
         main = src,
     )

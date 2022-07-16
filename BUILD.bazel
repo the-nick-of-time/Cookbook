@@ -7,7 +7,6 @@ load("@keys//:secrets.bzl", "SERVER_ID")
 filegroup(
     name = "packages",
     srcs = [
-        "@annatar",
         "@bazel_latex//packages:booktabs",
         "@bazel_latex//packages:cuisine",
         "@bazel_latex//packages:diagbox",
@@ -26,6 +25,18 @@ filegroup(
         "@bazel_latex//packages:tabularx",
         "@bazel_latex//packages:tengwarscript",
         "@bazel_latex//packages:thumbs",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "supporting",
+    srcs = [
+        "formatting.sty",
+        "functions.lua",
+        "luamacros.sty",
+        "usetengwar.sty",
+        "@annatar",
     ],
     visibility = ["//visibility:public"],
 )
