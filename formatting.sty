@@ -71,3 +71,11 @@
 
 % Allow things to pull away from the bottom of the page avoiding weird spacing issues on chapter pages
 \raggedbottom
+
+% Set recipe formatting, with special emphasis on differentiating step number and ingredient quantity
+\renewcommand{\recipefont}{\large}
+\renewcommand*{\recipestepnumberfont}{\large\itshape\bfseries}
+\renewcommand{\recipetimefont}{\itshape}
+\renewcommand{\recipeservingsfont}{\bfseries}
+\renewcommand{\recipetitlefont}{\Large\bfseries}
+\RecipeWidths{\textwidth}{.2\textwidth}{.05\textwidth}{.2\textwidth}{.075\textwidth}{.075\textwidth}
