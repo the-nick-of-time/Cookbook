@@ -4,6 +4,7 @@ import sys
 densities = [
     ("Granulated sugar", "sugar", 190),
     ("Brown sugar (packed)", "brownsugar", 200),
+    ("Powdered sugar", "powderedsugar", 190),
     ("Butter", "butter", 230),
     ("Water", "water", 240),
     ("Flour", "SKIP", 150),
