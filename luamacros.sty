@@ -12,10 +12,7 @@
 
 \newcommand{\yeast}[1]{\directlua{tex.print(doc.density("yeast", "teaspoon", 3.4, \luastring{#1}))}}
 
-\newcommand{\cornmeal}[1]{\directlua{tex.print(doc.density("cornmeal", "cup", 140, \luastring{#1}))}}
-
-\newcommand{\milk}[1]{\directlua{tex.print(doc.density("milk", "cup", 240, \luastring{#1}))}}
-
+\input{density-macros.sty}
 
 % Macro for the temperature conversion function
 \newcommand{\tempf}[1]{#1\si{\degree}F (\directlua{tex.write(doc.round_to_nearest(doc.f_to_c(#1), 5))}\si{\degree}C)}

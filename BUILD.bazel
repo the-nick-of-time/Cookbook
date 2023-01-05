@@ -37,6 +37,7 @@ filegroup(
         "functions.lua",
         "luamacros.sty",
         "@annatar",
+        ":density-macros",
     ],
     visibility = ["//visibility:public"],
 )
@@ -49,7 +50,14 @@ py_binary(
 genrule(
     name = "density-table",
     outs = ["density-table.tex"],
-    cmd = "$(location :densities) >$@",
+    cmd = "$(location :densities) table >$@",
+    tools = [":densities"],
+)
+
+genrule(
+    name = "density-macros",
+    outs = ["density-macros.sty"],
+    cmd = "$(location :densities) macros >$@",
     tools = [":densities"],
 )
 
