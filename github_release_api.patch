@@ -54,3 +54,9 @@ index 28609ca..fae07b4 100755
      checkTag
      release_id=$(getGithubReleaseId $TAG)
      infoMsg "Git tag $TAG refers to github release ID: $release_id"
+
+--- github_release_api.sh
++++ github_release_api.sh
+@@ -27,1 +27,1 @@
+-s_dir=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P )
++s_dir=$( cd -P -- "$(dirname -- "$(readlink -- "$0")")" && pwd -P )

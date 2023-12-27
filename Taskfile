@@ -39,16 +39,17 @@ function deploy {
 function release {
 	: "Create a github release from the current commit, as long as it's tagged"
 	build
-	bazel run @github_release_api//:release \
+	bazel run @github_release_api//:release -- \
 		-l the-nick-of-time -t "$GITHUB_API_KEY" \
 		-o the-nick-of-time -r Cookbook \
 		-d $(git describe --tags --abbrev=0) \
 		-c create
-	bazel run @github_release_api//:release \
+	out="$(readlink bazel-bin)"
+	bazel run @github_release_api//:release -- \
 		-l the-nick-of-time -t "$GITHUB_API_KEY" \
 		-o the-nick-of-time -r Cookbook \
 		-d $(git describe --tags --abbrev=0) \
-		-c upload bazel-bin/Cookbook-Tested.pdf bazel-bin/Cookbook-Digital.pdf bazel-bin/Cookbook.pdf
+		-c upload "$out"/Cookbook-Tested.pdf "$out"/Cookbook-Digital.pdf "$out"/Cookbook.pdf
 }
 
 function new {
