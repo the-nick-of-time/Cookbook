@@ -14,6 +14,7 @@ densities = [
     ("Flour", "SKIP", 150),
     ("Cornmeal", "cornmeal", 140),
     ("Buttermilk powder", "buttermilk", 160),
+    ("Rolled oats", "oats", 105),
 ]
 
 def table():
