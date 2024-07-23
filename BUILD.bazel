@@ -25,6 +25,7 @@ filegroup(
         "@bazel_latex//packages:tabularx",
         "@bazel_latex//packages:tengwarscript",
         "@bazel_latex//packages:thumbs",
+        "@bazel_latex//packages:xcolor",
         "@usetengwar//:packages",
     ],
     visibility = ["//visibility:public"],
